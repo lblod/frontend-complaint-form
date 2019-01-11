@@ -1,3 +1,7 @@
+{{#each-in this.showErrors as |field value|}}
+  {{#if value}} {{v-get model field "message"}} {{/if}}
+{{/each-in}}
+
 <h1>Digitaal klachtenformulier</h1>
 
 <p>
@@ -9,9 +13,8 @@
 </p>
 
 <form>
-
   <label>Naam</label>
-  {{input value=model.name class="form-control" required=true}}
+  {{input value=model.name class="form-control" focus-out=(action (mut showErrors.name) true)}}
 
   <br><br>
 
@@ -21,12 +24,12 @@
   <br><br>
 
   <label>Straat</label>
-  {{input value=model.street class="form-control" required=true}}
+  {{input value=model.street class="form-control" focus-out=(action (mut showErrors.street) true)}}
 
   <br><br>
 
   <label>Huisnummer</label>
-  {{input value=model.houseNumber class="form-control" required=true}}
+  {{input value=model.houseNumber class="form-control" focus-out=(action (mut showErrors.houseNumber) true)}}
 
   <br><br>
 
@@ -36,27 +39,27 @@
   <br><br>
 
   <label>Postcode</label>
-  {{input value=model.postalCode class="form-control" required=true}}
+  {{input value=model.postalCode class="form-control" focus-out=(action (mut showErrors.postalCode) true)}}
 
   <br><br>
 
   <label>Gemeente of Stad</label>
-  {{input value=model.locality class="form-control" required=true}}
+  {{input value=model.locality class="form-control" focus-out=(action (mut showErrors.locality) true)}}
 
   <br><br>
 
   <label>Telefoonnummer</label>
-  {{input value=model.telephone class="form-control"}}
+  {{input value=model.telephone class="form-control" focus-out=(action (mut showErrors.telephone) true)}}
 
   <br><br>
 
   <label>Mailadres</label>
-  {{input value=model.email class="form-control" required=true}}
+  {{input value=model.email class="form-control" focus-out=(action (mut showErrors.email) true)}}
 
   <br><br>
 
   <label>Omschrijving klacht</label>
-  {{textarea value=model.content class="form-control"required=true}}
+  {{textarea value=model.content class="form-control" focus-out=(action (mut showErrors.content) true)}}
   <p>
     Beschrijf zo duidelijk mogelijk wat uw klacht inhoudt: wie, wat, waar en
     wanneer. Geef aan tegen welke handelingen of beslissingen van welk bestuur
@@ -70,7 +73,7 @@
 
   <br><br>
 
-  <button {{action "submitComplaint"}}>Bericht verzenden</button>
+  <button {{action "submitComplaint"}} disabled={{v-get model "isInvalid"}}>Bericht verzenden</button>
 </form>
 
 <div>
