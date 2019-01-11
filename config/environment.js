@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   let ENV = {
-    modulePrefix: 'frontend-klachtenformulier',
+    modulePrefix: 'frontend-complaint-form',
     environment,
     rootURL: '/',
     locationType: 'auto',

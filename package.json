@@ -1,11 +1,11 @@
 {
-  "name": "frontend-klachtenformulier",
-  "version": "0.0.0",
+  "name": "frontend-complaint-form",
+  "version": "0.1.0",
   "private": true,
-  "description": "Small description for frontend-klachtenformulier goes here",
+  "description": "Ember.js frontend of the complaint-form app.",
   "repository": "",
   "license": "MIT",
-  "author": "",
+  "author": "redpencil.io",
   "directories": {
     "doc": "doc",
     "test": "tests"

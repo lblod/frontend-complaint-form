@@ -1,3 +1,3 @@
-# frontend-klachtenformulier
+# frontend-complaint-form
 
-Frontend of the Klachtenformulier application 
+Frontend of the complaint-form application
