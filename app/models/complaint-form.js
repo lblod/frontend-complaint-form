@@ -3,15 +3,15 @@ import DS from 'ember-data';
 const { Model, attr } = DS;
 
 export default Model.extend({
-  name: attr('string'),
-  contactPersonName: attr('string'),
-  street: attr('string'),
-  houseNumber: attr('string'),
-  addressComplement: attr('string'),
-  locality: attr('string'),
-  postalCode: attr('string'),
-  telephone: attr('string'),
-  email: attr('string'),
-  content: attr('string'),
+  name: attr(),
+  contactPersonName: attr(),
+  street: attr(),
+  houseNumber: attr(),
+  addressComplement: attr(),
+  locality: attr(),
+  postalCode: attr(),
+  telephone: attr(),
+  email: attr(),
+  content: attr(),
   created: attr('date')
 });

@@ -11,61 +11,52 @@
 <form>
 
   <label>Naam</label>
-  <input value={{model.name}} required/>
+  {{input value=model.name class="form-control" required=true}}
 
-  <br>
-  <br>
+  <br><br>
 
   <label>Contactpersoon indien vereniging</label>
-  <input value={{model.contactPersonName}}/>
+  {{input value=model.contactPersonName class="form-control"}}
 
-  <br>
-  <br>
+  <br><br>
 
   <label>Straat</label>
-  <input value={{model.street}} required/>
+  {{input value=model.street class="form-control" required=true}}
 
-  <br>
-  <br>
+  <br><br>
 
   <label>Huisnummer</label>
-  <input value={{model.houseNumber}} required/>
+  {{input value=model.houseNumber class="form-control" required=true}}
 
-  <br>
-  <br>
+  <br><br>
 
   <label>Toevoeging</label>
-  <input value={{model.addressComplement}}/>
+  {{input value=model.addressComplement class="form-control"}}
 
-  <br>
-  <br>
+  <br><br>
 
   <label>Postcode</label>
-  <input value={{model.postalCode}} required/>
+  {{input value=model.postalCode class="form-control" required=true}}
 
-  <br>
-  <br>
+  <br><br>
 
   <label>Gemeente of Stad</label>
-  <input value={{model.locality}} required/>
+  {{input value=model.locality class="form-control" required=true}}
 
-  <br>
-  <br>
+  <br><br>
 
   <label>Telefoonnummer</label>
-  <input value={{model.telephone}}/>
+  {{input value=model.telephone class="form-control"}}
 
-  <br>
-  <br>
+  <br><br>
 
   <label>Mailadres</label>
-  <input value={{model.email}} required/>
+  {{input value=model.email class="form-control" required=true}}
 
-  <br>
-  <br>
+  <br><br>
 
   <label>Omschrijving klacht</label>
-  <textarea value={{model.content}} required/>
+  {{textarea value=model.content class="form-control"required=true}}
   <p>
     Beschrijf zo duidelijk mogelijk wat uw klacht inhoudt: wie, wat, waar en
     wanneer. Geef aan tegen welke handelingen of beslissingen van welk bestuur
@@ -73,19 +64,14 @@
     waarover u klacht wil indienen.
   </p>
 
-  <br>
-  <br>
+  <br><br>
 
-  <!-- TODO -->
   Bijlagen
 
-  <br>
-  <br>
+  <br><br>
 
   <button {{action "submitComplaint"}}>Bericht verzenden</button>
 </form>
-
-{{log "model" model}}
 
 <div>
   {{#each model.errors.name as |error|}}
