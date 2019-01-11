@@ -1,0 +1,96 @@
+<h1>Digitaal klachtenformulier</h1>
+
+<p>
+  U kan klacht indienen tegen de werking van een lokaal bestuur. Meer informatie
+  over klacht indienen kan u vinden op:
+  <a href="https://lokaalbestuur.vlaanderen.be/klachtenwegwijzer">
+    https://lokaalbestuur.vlaanderen.be/klachtenwegwijzer
+  </a>.
+</p>
+
+<form>
+
+  <label>Naam</label>
+  <input value={{model.name}} required/>
+
+  <br>
+  <br>
+
+  <label>Contactpersoon indien vereniging</label>
+  <input value={{model.contactPersonName}}/>
+
+  <br>
+  <br>
+
+  <label>Straat</label>
+  <input value={{model.street}} required/>
+
+  <br>
+  <br>
+
+  <label>Huisnummer</label>
+  <input value={{model.houseNumber}} required/>
+
+  <br>
+  <br>
+
+  <label>Toevoeging</label>
+  <input value={{model.addressComplement}}/>
+
+  <br>
+  <br>
+
+  <label>Postcode</label>
+  <input value={{model.postalCode}} required/>
+
+  <br>
+  <br>
+
+  <label>Gemeente of Stad</label>
+  <input value={{model.locality}} required/>
+
+  <br>
+  <br>
+
+  <label>Telefoonnummer</label>
+  <input value={{model.telephone}}/>
+
+  <br>
+  <br>
+
+  <label>Mailadres</label>
+  <input value={{model.email}} required/>
+
+  <br>
+  <br>
+
+  <label>Omschrijving klacht</label>
+  <textarea value={{model.content}} required/>
+  <p>
+    Beschrijf zo duidelijk mogelijk wat uw klacht inhoudt: wie, wat, waar en
+    wanneer. Geef aan tegen welke handelingen of beslissingen van welk bestuur
+    u klacht wenst in te dienen, en wat zijn de concrete feiten/handelingen
+    waarover u klacht wil indienen.
+  </p>
+
+  <br>
+  <br>
+
+  <!-- TODO -->
+  Bijlagen
+
+  <br>
+  <br>
+
+  <button {{action "submitComplaint"}}>Bericht verzenden</button>
+</form>
+
+{{log "model" model}}
+
+<div>
+  {{#each model.errors.name as |error|}}
+    {{error.message}}
+  {{/each}}
+</div>
+
+{{outlet}}
