@@ -71,6 +71,13 @@
 
   Bijlagen
 
+  <div>
+    {{#each model.attachments as |attachment|}}
+      {{vo-mu-file-card file=attachment onDelete=(action "deleteFile") }}
+    {{/each}}
+    {{vo-mu-file-dropzone onFinishUpload=(action "attachFile") maxFileSizeMB=1024}}
+  </div>
+
   <br><br>
 
   <button {{action "submitComplaint"}} disabled={{v-get model "isInvalid"}}>Bericht verzenden</button>

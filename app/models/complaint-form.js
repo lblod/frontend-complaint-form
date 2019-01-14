@@ -1,5 +1,6 @@
 import DS from 'ember-data';
 import { buildValidations, validator } from 'ember-cp-validations';
+import { hasMany } from 'ember-data/relationships';
 
 const { Model, attr } = DS;
 
@@ -88,5 +89,6 @@ export default Model.extend(Validations, {
   telephone: attr(),
   email: attr(),
   content: attr(),
-  created: attr('date')
+  created: attr('date'),
+  attachments: hasMany('file')
 });

@@ -8,6 +8,10 @@ const Router = EmberRouter.extend({
 
 Router.map(function() {
   this.route('complaint-form');
+
+  this.route('route-not-found', {
+    path: '/*wildcard'
+  });
 });
 
 export default Router;

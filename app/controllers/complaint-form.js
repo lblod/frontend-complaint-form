@@ -43,6 +43,14 @@ export default Controller.extend({
       } else {
         // Display error message
       }
+    },
+
+    attachFile(file) {
+      this.model.attachments.pushObject(file);
+    },
+
+    deleteFile(file) {
+      this.model.attachments.removeObject(file);
     }
   }
 });
