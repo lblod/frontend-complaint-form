@@ -51,7 +51,6 @@ const Validations = buildValidations({
     })
   ],
   telephone: [
-    validator('presence', false),
     validator('number', {
       allowBlank: true,
       allowString: true,
