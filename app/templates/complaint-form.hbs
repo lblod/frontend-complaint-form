@@ -80,13 +80,12 @@
 
   <br><br>
 
+  <div>
+    {{#if saveComplaintError}}
+      {{saveComplaintError}}
+    {{/if}}
+  </div>
   <button {{action "submitComplaint"}} disabled={{v-get model "isInvalid"}}>Bericht verzenden</button>
 </form>
-
-<div>
-  {{#each model.errors.name as |error|}}
-    {{error.message}}
-  {{/each}}
-</div>
 
 {{outlet}}

@@ -23,25 +23,23 @@ export default Controller.extend({
     }
   }),
 
-  saveComplaintError: null,
-
   saveComplaint: task(function*() {
     try {
+      throw new Error("Message");
       let complaint = this.get('model');
       complaint.set('created', new Date());
       yield complaint.save();
     } catch (e) {
-      this.saveComplaintError = e.message;
+      this.set('saveComplaintError', e.message);
     }
   }).drop(),
 
   actions: {
     submitComplaint() {
+      this.set('saveComplaintError', null);
       this.saveComplaint.perform();
       if (!this.saveComplaintError) {
-        this.transitionToRoute('complaint-form');
-      } else {
-        // Display error message
+        this.transitionToRoute('confirmation');
       }
     },
 

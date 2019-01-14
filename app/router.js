@@ -12,6 +12,7 @@ Router.map(function() {
   this.route('route-not-found', {
     path: '/*wildcard'
   });
+  this.route('confirmation', { path: '/complaint-form-confirmation' });
 });
 
 export default Router;
