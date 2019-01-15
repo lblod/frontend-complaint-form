@@ -18,8 +18,9 @@
 		transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, background-color ease-in-out .15s;
 	}
 
+	.textarea,
 	.input-field {
-		height: 50px;
+		min-height: 50px;
 	}
 
 	.textarea--error,
