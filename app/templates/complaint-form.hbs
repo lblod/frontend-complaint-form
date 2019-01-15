@@ -57,7 +57,7 @@
               <span class="form__required">*</span>
               {{input value=model.houseNumber class=(if showErrors.houseNumber "input-field input-field--block input-field--error" "input-field input-field--block") focus-out=(action (mut showErrors.houseNumber) true)}}
             </label>
-            {{#if showErrors.street}}
+            {{#if showErrors.houseNumber}}
             <p class="small form__error-message">Geef een geldig huisnummer op.</p>
             {{/if}}
           </div>
