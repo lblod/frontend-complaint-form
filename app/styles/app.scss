@@ -59,5 +59,12 @@
 			background: #5c9419;
 		}
 	}
+
+	.button[disabled] {
+		background-color: #E6E8E3;
+		border-color: #C4C6C1;
+		color: #474747;
+		pointer-events: none;
+	}
 }
 
