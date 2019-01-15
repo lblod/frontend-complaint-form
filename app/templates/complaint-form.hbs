@@ -29,7 +29,7 @@
 		<form>
 			<div class="form__row">
 			  <label class="form__label">Naam <span class="form__required">*</span></label>
-				 {{input value=model.name class="input-field input-field--block" focus-out=(action (mut showErrors.name) true)}}
+				 {{input value=model.name class="input-field input-field--block {{if showErrors.fieldName 'input-field--error' ''}}" focus-out=(action (mut showErrors.name) true)}}
 			</div>
 
 			<div class="form__row">
@@ -41,11 +41,11 @@
 				<div class="grid">
 				  <div class="col--6-12 col--12-12--s">
 				  	<label class="form__label">Straat <span class="form__required">*</span></label>
-				 	 	{{input value=model.street class="input-field input-field--block" focus-out=(action (mut showErrors.street) true)}}
+				 	 	{{input value=model.street class="input-field input-field--block {{if showErrors.fieldName 'input-field--error' ''}}" focus-out=(action (mut showErrors.street) true)}}
 				 	</div>
 				  <div class="col--3-12 col--6-12--s">
 				  	<label class="form__label">Huisnummer <span class="form__required">*</span></label>
-				 	 {{input value=model.houseNumber class="input-field input-field--block" focus-out=(action (mut showErrors.houseNumber) true)}}
+				 	 {{input value=model.houseNumber class="input-field input-field--block {{if showErrors.fieldName 'input-field--error' ''}}" focus-out=(action (mut showErrors.houseNumber) true)}}
 				 	</div>
 				  <div class="col--3-12 col--6-12--s">
 				  	<label class="form__label">Toevoeging</label>
@@ -58,11 +58,11 @@
 				<div class="grid">
 				  <div class="col--8-12 col--12-12--xs">
 					  <label class="form__label">Gemeente of Stad <span class="form__required">*</span></label>
-					  {{input value=model.locality class="input-field input-field--block" focus-out=(action (mut showErrors.locality) true)}}
+					  {{input value=model.locality class="input-field input-field--block {{if showErrors.fieldName 'input-field--error' ''}}" focus-out=(action (mut showErrors.locality) true)}}
 					</div>
 				  <div class="col--4-12 col--12-12--xs">
 					  <label class="form__label">Postcode <span class="form__required">*</span></label>
-					  {{input value=model.postalCode class="input-field input-field--block" focus-out=(action (mut showErrors.postalCode) true)}}
+					  {{input value=model.postalCode class="input-field input-field--block {{if showErrors.fieldName 'input-field--error' ''}}" focus-out=(action (mut showErrors.postalCode) true)}}
 					</div>
 				</div>
 			</div>
@@ -74,12 +74,12 @@
 
 			<div class="form__row">
 			  <label class="form__label">Mailadres <span class="form__required">*</span></label>
-			  {{input value=model.email class="input-field input-field--block" focus-out=(action (mut showErrors.email) true)}}
+			  {{input value=model.email class="input-field input-field--block {{if showErrors.fieldName 'input-field--error' ''}}" focus-out=(action (mut showErrors.email) true)}}
 			</div>
 
 			<div class="form__row">
 			  <label class="form__label">Omschrijving klacht <span class="form__required">*</span></label>
-			  {{textarea value=model.content class="textarea textarea--block component u-spacer--tiny" focus-out=(action (mut showErrors.content) true) rows="5"}}
+			  {{textarea value=model.content class="textarea textarea--block {{if showErrors.fieldName 'textarea--error' ''}} component u-spacer--tiny" focus-out=(action (mut showErrors.content) true) rows="5"}}
 			  <p class="smaller">
 			    Beschrijf zo duidelijk mogelijk wat uw klacht inhoudt: wie, wat, waar en
 			    wanneer. Geef aan tegen welke handelingen of beslissingen van welk bestuur
