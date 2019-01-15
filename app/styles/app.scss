@@ -14,6 +14,7 @@
 	.input-field {
 		border-color: #BFBFBF;
 		border-bottom-width: 3px;
+		transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, background-color ease-in-out .15s;
 	}
 
 	.input-field {
@@ -23,7 +24,7 @@
 	.textarea:focus,
 	.input-field:focus {
 		border-bottom-color: #74B52F;
-		box-shadow: inset 0 0 0 1px #74B52F;
+		box-shadow: none;
 	}
 
 	.textarea--error,
