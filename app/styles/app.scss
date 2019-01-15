@@ -22,15 +22,18 @@
 		height: 50px;
 	}
 
-	.textarea:focus,
-	.input-field:focus {
-		border-bottom-color: #74B52F;
+	.textarea--error,
+	.input-field--error {
+		border-color: #FC0D1B;
+		background-color: transparent;
 		box-shadow: none;
 	}
 
-	.textarea--error,
-	.input-field--error {
-		border-color: #CA1921;
+	.textarea:focus,
+	.input-field:focus {
+		border-color: #BFBFBF;
+		border-bottom-color: #74B52F;
+		box-shadow: none;
 	}
 
 	.upload__file a,
