@@ -81,7 +81,7 @@
           <label class="form__label">
             Gemeente of Stad
             <span class="form__required">*</span>
-            {{input value=model.locality class=(if localityIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block") focus-out=(action (mut showErrors.houseNumber) true) keyDown=(action (mut showErrors.locality) true)}}
+            {{input value=model.locality class=(if localityIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block") focus-out=(action (mut showErrors.locality) true) keyDown=(action (mut showErrors.locality) true)}}
           </label>
           {{#if localityIsInvalid}}
             <p class="small form__error-message">Gelieve dit veld in te vullen.</p>
