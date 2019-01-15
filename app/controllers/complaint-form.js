@@ -25,7 +25,6 @@ export default Controller.extend({
 
   saveComplaint: task(function*() {
     try {
-      throw new Error("Message");
       let complaint = this.get('model');
       complaint.set('created', new Date());
       yield complaint.save();
