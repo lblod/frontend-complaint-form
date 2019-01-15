@@ -65,7 +65,7 @@ const Validations = buildValidations({
     }),
     validator('format', {
       type: 'email',
-      message: 'Het veld Mailadres moet een geldig Mailadres bevatten'
+      message: "Het veld Mailadres moet een geldig Mailadres bevatten"
     })
   ],
   content: [
