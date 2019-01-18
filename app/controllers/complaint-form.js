@@ -24,35 +24,35 @@ export default Controller.extend({
     }
   }),
 
-  nameIsInvalid: computed('showErrors', 'model.validations.attrs.name.isInvalid', function() {
+  nameIsInvalid: computed('showErrors.name', 'model.validations.attrs.name.isInvalid', function() {
     return this.showErrors.name && this.model.get('validations.attrs.name.isInvalid');
   }),
 
-  streetIsInvalid: computed('showErrors', 'model.validations.attrs.street.isInvalid', function() {
+  streetIsInvalid: computed('showErrors.street', 'model.validations.attrs.street.isInvalid', function() {
     return this.showErrors.street && this.model.get('validations.attrs.street.isInvalid');
   }),
 
-  houseNumberIsInvalid: computed('showErrors', 'model.validations.attrs.houseNumber.isInvalid', function() {
+  houseNumberIsInvalid: computed('showErrors.houseNumber', 'model.validations.attrs.houseNumber.isInvalid', function() {
     return this.showErrors.houseNumber && this.model.get('validations.attrs.houseNumber.isInvalid');
   }),
 
-  postalCodeIsInvalid: computed('showErrors', 'model.validations.attrs.postalCode.isInvalid', function() {
+  postalCodeIsInvalid: computed('showErrors.postalCode', 'model.validations.attrs.postalCode.isInvalid', function() {
     return this.showErrors.postalCode && this.model.get('validations.attrs.postalCode.isInvalid');
   }),
 
-  localityIsInvalid: computed('showErrors', 'model.validations.attrs.locality.isInvalid', function() {
+  localityIsInvalid: computed('showErrors.locality', 'model.validations.attrs.locality.isInvalid', function() {
     return this.showErrors.locality && this.model.get('validations.attrs.locality.isInvalid');
   }),
 
-  telephoneIsInvalid: computed('showErrors', 'model.validations.attrs.telephone.isInvalid', function() {
+  telephoneIsInvalid: computed('showErrors.telephone', 'model.validations.attrs.telephone.isInvalid', function() {
     return this.showErrors.telephone && this.model.get('validations.attrs.telephone.isInvalid');
   }),
 
-  emailIsInvalid: computed('showErrors', 'model.validations.attrs.email.isInvalid', function() {
+  emailIsInvalid: computed('showErrors.email', 'model.validations.attrs.email.isInvalid', function() {
     return this.showErrors.email && this.model.get('validations.attrs.email.isInvalid');
   }),
 
-  contentIsInvalid: computed('showErrors', 'model.validations.attrs.content.isInvalid', function() {
+  contentIsInvalid: computed('showErrors.content', 'model.validations.attrs.content.isInvalid', function() {
     return this.showErrors.content && this.model.get('validations.attrs.content.isInvalid');
   }),
 
