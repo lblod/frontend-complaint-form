@@ -88,6 +88,6 @@ export default Model.extend(Validations, {
   telephone: attr(),
   email: attr(),
   content: attr(),
-  created: attr('date'),
+  created: attr('datetime'),
   attachments: hasMany('file')
 });
