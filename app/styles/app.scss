@@ -1,0 +1,71 @@
+.lokaalbestuur-vlaanderen {
+	h1 {
+		color: #E49A31;
+		font-weight: 500;
+		font-size: 32px;
+		margin-bottom: 1rem;
+	}
+
+	.form__error-message,
+	.form__required {
+		color: #CA1921;
+	}
+
+	.textarea,
+	.input-field {
+		border-color: #BFBFBF;
+		border-bottom-width: 3px;
+		transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, background-color ease-in-out .15s;
+	}
+
+	.textarea,
+	.input-field {
+		min-height: 50px;
+	}
+
+	.textarea--error,
+	.input-field--error {
+		border-color: #FC0D1B;
+		background-color: transparent;
+		box-shadow: none;
+	}
+
+	.textarea:focus,
+	.input-field:focus {
+		border-color: #BFBFBF;
+		border-bottom-color: #74B52F;
+		box-shadow: none;
+	}
+
+	.upload__file a,
+	.upload__element__label {
+		color: #64a11b;
+	}
+
+	.button {
+		background: #72b71f;
+		border-bottom: 3px solid #497614;
+		font-weight: 500;
+		height: 50px;
+		position: relative;
+
+		&:hover {
+	    background: #64a11b;
+	    border-color: #3c6010;
+			top: 1px;
+		}
+
+		&:focus,
+		&:active {
+			background: #5c9419;
+		}
+	}
+
+	.button[disabled] {
+		background-color: #E6E8E3;
+		border-color: #C4C6C1;
+		color: #474747;
+		pointer-events: none;
+	}
+}
+

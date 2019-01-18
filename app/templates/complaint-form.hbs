@@ -1,91 +1,160 @@
-{{#each-in this.showErrors as |field value|}}
-  {{#if value}} {{v-get model field "message"}} {{/if}}
-{{/each-in}}
+<div class="lokaalbestuur-vlaanderen u-padding--round--small">
+  {{#if formIsInvalid}}
+    <div class="alert alert--error">
+      <div class="alert__icon" aria-hidden="true"></div>
+      <div class="alert__content">
+        <div class="alert__title">Gelieve de velden van uw bericht na te kijken</div>
+        <div class="alert__message">
+          <ul class="bullet-list">
+            {{#each-in this.showErrors as |field value|}}
+              {{#if value}}
+                {{#if (v-get model field "isInvalid")}}
+                  <li>{{v-get model field "message"}}</li>
+                {{/if}}
+              {{/if}}
+            {{/each-in}}
+          </ul>
+        </div>
+      </div>
+    </div>
+  {{/if}}
 
-<h1>Digitaal klachtenformulier</h1>
+  <h1 class="h1">Digitaal klachtenformulier</h1>
 
-<p>
-  U kan klacht indienen tegen de werking van een lokaal bestuur. Meer informatie
-  over klacht indienen kan u vinden op:
-  <a href="https://lokaalbestuur.vlaanderen.be/klachtenwegwijzer">
-    https://lokaalbestuur.vlaanderen.be/klachtenwegwijzer
-  </a>.
-</p>
-
-<form>
-  <label>Naam</label>
-  {{input value=model.name class="form-control" focus-out=(action (mut showErrors.name) true)}}
-
-  <br><br>
-
-  <label>Contactpersoon indien vereniging</label>
-  {{input value=model.contactPersonName class="form-control"}}
-
-  <br><br>
-
-  <label>Straat</label>
-  {{input value=model.street class="form-control" focus-out=(action (mut showErrors.street) true)}}
-
-  <br><br>
-
-  <label>Huisnummer</label>
-  {{input value=model.houseNumber class="form-control" focus-out=(action (mut showErrors.houseNumber) true)}}
-
-  <br><br>
-
-  <label>Toevoeging</label>
-  {{input value=model.addressComplement class="form-control"}}
-
-  <br><br>
-
-  <label>Postcode</label>
-  {{input value=model.postalCode class="form-control" focus-out=(action (mut showErrors.postalCode) true)}}
-
-  <br><br>
-
-  <label>Gemeente of Stad</label>
-  {{input value=model.locality class="form-control" focus-out=(action (mut showErrors.locality) true)}}
-
-  <br><br>
-
-  <label>Telefoonnummer</label>
-  {{input value=model.telephone class="form-control" focus-out=(action (mut showErrors.telephone) true)}}
-
-  <br><br>
-
-  <label>Mailadres</label>
-  {{input value=model.email class="form-control" focus-out=(action (mut showErrors.email) true)}}
-
-  <br><br>
-
-  <label>Omschrijving klacht</label>
-  {{textarea value=model.content class="form-control" focus-out=(action (mut showErrors.content) true)}}
-  <p>
-    Beschrijf zo duidelijk mogelijk wat uw klacht inhoudt: wie, wat, waar en
-    wanneer. Geef aan tegen welke handelingen of beslissingen van welk bestuur
-    u klacht wenst in te dienen, en wat zijn de concrete feiten/handelingen
-    waarover u klacht wil indienen.
+  <p class="u-spacer">
+    U kan klacht indienen tegen de werking van een lokaal bestuur. Meer informatie
+    over klacht indienen kan u vinden op:
+    <a href="https://lokaalbestuur.vlaanderen.be/klachtenwegwijzer">https://lokaalbestuur.vlaanderen.be/klachtenwegwijzer</a>.
   </p>
 
-  <br><br>
+  <form>
+    <div class="form__row">
+      <label class="form__label">
+        Naam
+        <span class="form__required">*</span>
+        {{input value=model.name class=(if nameIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block") focus-out=(action (mut showErrors.name) true) keyDown=(action (mut showErrors.name) true)}}
+      </label>
+      {{#if nameIsInvalid}}
+        <p class="small form__error-message">Gelieve dit veld in te vullen.</p>
+      {{/if}}
 
-  Bijlagen
+      <label class="form__label">
+        Contactpersoon indien vereniging
+        {{input value=model.contactPersonName class="input-field input-field--block"}}
+      </label>
+    </div>
 
-  <div>
-    {{#each model.attachments as |attachment|}}
-      {{vo-mu-file-card file=attachment onDelete=(action "deleteFile") }}
-    {{/each}}
-    {{vo-mu-file-dropzone onFinishUpload=(action "attachFile") maxFileSizeMB=1024}}
-  </div>
+    <div class="form__row">
+      <div class="grid">
+        <div class="col--6-12 col--12-12--s">
+          <label class="form__label">
+            Straat
+            <span class="form__required">*</span>
+            {{input value=model.street class=(if streetIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block") focus-out=(action (mut showErrors.street) true) keyDown=(action (mut showErrors.street) true)}}
+          </label>
+          {{#if streetIsInvalid}}
+            <p class="small form__error-message">Gelieve dit veld in te vullen.</p>
+          {{/if}}
+        </div>
+        <div class="col--3-12 col--6-12--s">
+          <label class="form__label">
+            Huisnummer
+            <span class="form__required">*</span>
+            {{input value=model.houseNumber class=(if houseNumberIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block") focus-out=(action (mut showErrors.houseNumber) true) keyDown=(action (mut showErrors.houseNumber) true)}}
+          </label>
+          {{#if houseNumberIsInvalid}}
+            <p class="small form__error-message">Geef een geldig huisnummer op.</p>
+          {{/if}}
+        </div>
+        <div class="col--3-12 col--6-12--s">
+          <label class="form__label">
+            Toevoeging
+            {{input value=model.addressComplement class="input-field input-field--block"}}
+          </label>
+        </div>
+      </div>
+    </div>
 
-  <br><br>
+    <div class="form__row">
+      <div class="grid">
+        <div class="col--8-12 col--12-12--xs">
+          <label class="form__label">
+            Gemeente of Stad
+            <span class="form__required">*</span>
+            {{input value=model.locality class=(if localityIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block") focus-out=(action (mut showErrors.locality) true) keyDown=(action (mut showErrors.locality) true)}}
+          </label>
+          {{#if localityIsInvalid}}
+            <p class="small form__error-message">Gelieve dit veld in te vullen.</p>
+          {{/if}}
+        </div>
+        <div class="col--4-12 col--12-12--xs">
+          <label class="form__label">
+            Postcode
+            <span class="form__required">*</span>
+            {{input value=model.postalCode class=(if postalCodeIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block") focus-out=(action (mut showErrors.postalCode) true) keyDown=(action (mut showErrors.postalCode) true)}}
+          </label>
+          {{#if postalCodeIsInvalid}}
+            <p class="small form__error-message">Geef een geldige postcode op.</p>
+          {{/if}}
+        </div>
+      </div>
+    </div>
 
-  <div>
-    {{#if saveComplaintError}}
-      {{saveComplaintError}}
-    {{/if}}
-  </div>
-  <button {{action "submitComplaint"}} disabled={{v-get model "isInvalid"}}>Bericht verzenden</button>
-</form>
+    <div class="form__row">
+      <label class="form__label">
+        Telefoonnummer
+        {{input value=model.telephone class=(if telephoneIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block") focus-out=(action (mut showErrors.telephone) true) keyDown=(action (mut showErrors.telephone) true)}}
+      </label>
+      {{#if telephoneIsInvalid}}
+        <p class="small form__error-message">Geef een geldig telefoonnummer op.</p>
+      {{/if}}
+    </div>
+
+    <div class="form__row">
+      <label class="form__label">
+        Mailadres
+        <span class="form__required">*</span>
+        {{input value=model.email class=(if emailIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block") focus-out=(action (mut showErrors.email) true) keyDown=(action (mut showErrors.email) true)}}
+      </label>
+      {{#if emailIsInvalid}}
+        <p class="small form__error-message">Geef een geldig mailadres op.</p>
+      {{/if}}
+    </div>
+
+    <div class="form__row">
+      <label class="form__label">
+        Omschrijving klacht
+        <span class="form__required">*</span>
+        {{textarea value=model.content class=(if contentIsInvalid "textarea textarea--block component u-spacer--tiny textarea--error" "textarea textarea--block component u-spacer--tiny") focus-out=(action (mut showErrors.content) true) keyDown=(action (mut showErrors.content) true) rows="5"}}
+      </label>
+      {{#if contentIsInvalid}}
+        <p class="small form__error-message">Gelieve dit veld in te vullen.</p>
+      {{/if}}
+      <p class="smaller">
+        Beschrijf zo duidelijk mogelijk wat uw klacht inhoudt: wie, wat, waar en
+        wanneer. Geef aan tegen welke handelingen of beslissingen van welk bestuur
+        u klacht wenst in te dienen, en wat zijn de concrete feiten/handelingen
+        waarover u klacht wil indienen.
+      </p>
+    </div>
+
+    <div class="form__row u-spacer">
+      <label class="form__label">Bijlagen</label>
+      <div>
+        {{#each model.attachments as |attachment|}}
+          {{vo-mu-file-card file=attachment onDelete=(action "deleteFile") }}
+        {{/each}}
+        {{vo-mu-file-dropzone onFinishUpload=(action "attachFile") maxFileSizeMB=1024}}
+      </div>
+    </div>
+
+    <div>
+      {{#if saveComplaintError}}
+        {{saveComplaintError}}
+      {{/if}}
+    </div>
+    <button {{action "submitComplaint"}} disabled={{v-get model "isInvalid"}} class="button" role="button">Bericht verzenden</button>
+  </form>
+</div>
 
 {{outlet}}
