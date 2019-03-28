@@ -69,7 +69,7 @@ export default Controller.extend({
 
   saveComplaint: task(function*() {
     try {
-      let complaint = this.get('model');
+      let complaint = this.model;
       complaint.set('created', new Date());
       yield complaint.save();
     } catch (e) {
