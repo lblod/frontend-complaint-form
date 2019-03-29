@@ -32,7 +32,7 @@
       <label class="form__label">
         Naam
         <span class="form__required">*</span>
-        {{input value=model.name class=(if nameIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block") focus-out=(action (mut showErrors.name) true) keyDown=(action (mut showErrors.name) true)}}
+        {{input value=model.name class=(if nameIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block") focus-out=(action (mut showErrors.name) true)}}
       </label>
       {{#if nameIsInvalid}}
         <p class="small form__error-message">Gelieve dit veld in te vullen.</p>
@@ -50,7 +50,7 @@
           <label class="form__label">
             Straat
             <span class="form__required">*</span>
-            {{input value=model.street class=(if streetIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block") focus-out=(action (mut showErrors.street) true) keyDown=(action (mut showErrors.street) true)}}
+            {{input value=model.street class=(if streetIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block") focus-out=(action (mut showErrors.street) true)}}
           </label>
           {{#if streetIsInvalid}}
             <p class="small form__error-message">Gelieve dit veld in te vullen.</p>
@@ -60,7 +60,7 @@
           <label class="form__label">
             Huisnummer
             <span class="form__required">*</span>
-            {{input value=model.houseNumber class=(if houseNumberIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block") focus-out=(action (mut showErrors.houseNumber) true) keyDown=(action (mut showErrors.houseNumber) true)}}
+            {{input value=model.houseNumber class=(if houseNumberIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block") focus-out=(action (mut showErrors.houseNumber) true)}}
           </label>
           {{#if houseNumberIsInvalid}}
             <p class="small form__error-message">Geef een geldig huisnummer op.</p>
@@ -81,7 +81,7 @@
           <label class="form__label">
             Gemeente of Stad
             <span class="form__required">*</span>
-            {{input value=model.locality class=(if localityIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block") focus-out=(action (mut showErrors.locality) true) keyDown=(action (mut showErrors.locality) true)}}
+            {{input value=model.locality class=(if localityIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block") focus-out=(action (mut showErrors.locality) true)}}
           </label>
           {{#if localityIsInvalid}}
             <p class="small form__error-message">Gelieve dit veld in te vullen.</p>
@@ -91,7 +91,7 @@
           <label class="form__label">
             Postcode
             <span class="form__required">*</span>
-            {{input value=model.postalCode class=(if postalCodeIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block") focus-out=(action (mut showErrors.postalCode) true) keyDown=(action (mut showErrors.postalCode) true)}}
+            {{input value=model.postalCode class=(if postalCodeIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block") focus-out=(action (mut showErrors.postalCode) true)}}
           </label>
           {{#if postalCodeIsInvalid}}
             <p class="small form__error-message">Geef een geldige postcode op.</p>
@@ -103,7 +103,7 @@
     <div class="form__row">
       <label class="form__label">
         Telefoonnummer
-        {{input value=model.telephone class=(if telephoneIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block") focus-out=(action (mut showErrors.telephone) true) keyDown=(action (mut showErrors.telephone) true)}}
+        {{input value=model.telephone class=(if telephoneIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block") focus-out=(action (mut showErrors.telephone) true)}}
       </label>
       {{#if telephoneIsInvalid}}
         <p class="small form__error-message">Geef een geldig telefoonnummer op.</p>
@@ -114,7 +114,7 @@
       <label class="form__label">
         Mailadres
         <span class="form__required">*</span>
-        {{input value=model.email class=(if emailIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block") focus-out=(action (mut showErrors.email) true) keyDown=(action (mut showErrors.email) true)}}
+        {{input value=model.email class=(if emailIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block") focus-out=(action (mut showErrors.email) true)}}
       </label>
       {{#if emailIsInvalid}}
         <p class="small form__error-message">Geef een geldig mailadres op.</p>
@@ -125,7 +125,7 @@
       <label class="form__label">
         Omschrijving klacht
         <span class="form__required">*</span>
-        {{textarea value=model.content class=(if contentIsInvalid "textarea textarea--block component u-spacer--tiny textarea--error" "textarea textarea--block component u-spacer--tiny") focus-out=(action (mut showErrors.content) true) keyDown=(action (mut showErrors.content) true) rows="5"}}
+        {{textarea value=model.content class=(if contentIsInvalid "textarea textarea--block component u-spacer--tiny textarea--error" "textarea textarea--block component u-spacer--tiny") focus-out=(action (mut showErrors.content) true) rows="5"}}
       </label>
       {{#if contentIsInvalid}}
         <p class="small form__error-message">Gelieve dit veld in te vullen.</p>
@@ -142,7 +142,7 @@
       <label class="form__label">Bijlagen</label>
       <div>
         {{#each model.attachments as |attachment|}}
-          {{vo-mu-file-card file=attachment onDelete=(action "deleteFile") }}
+          {{vo-mu-file-card file=attachment downloadable=false onDelete=(action "deleteFile")}}
         {{/each}}
         {{vo-mu-file-dropzone onFinishUpload=(action "attachFile") maxFileSizeMB=1024}}
       </div>
