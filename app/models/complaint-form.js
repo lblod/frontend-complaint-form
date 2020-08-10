@@ -1,3 +1,4 @@
+import classic from 'ember-classic-decorator';
 import DS from 'ember-data';
 import { buildValidations, validator } from 'ember-cp-validations';
 import { hasMany } from 'ember-data/relationships';
@@ -77,17 +78,41 @@ const Validations = buildValidations({
   ],
 });
 
-export default Model.extend(Validations, {
-  name: attr(),
-  contactPersonName: attr(),
-  street: attr(),
-  houseNumber: attr(),
-  addressComplement: attr(),
-  locality: attr(),
-  postalCode: attr(),
-  telephone: attr(),
-  email: attr(),
-  content: attr(),
-  created: attr('datetime'),
-  attachments: hasMany('file')
-});
+@classic
+export default class ComplaintForm extends Model.extend(Validations) {
+  @attr()
+  name;
+
+  @attr()
+  contactPersonName;
+
+  @attr()
+  street;
+
+  @attr()
+  houseNumber;
+
+  @attr()
+  addressComplement;
+
+  @attr()
+  locality;
+
+  @attr()
+  postalCode;
+
+  @attr()
+  telephone;
+
+  @attr()
+  email;
+
+  @attr()
+  content;
+
+  @attr('datetime')
+  created;
+
+  @hasMany('file')
+  attachments;
+}
