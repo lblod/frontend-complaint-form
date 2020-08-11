@@ -1,27 +1,13 @@
-import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
-import Model from 'ember-data/model';
-import attr from 'ember-data/attr';
+import Model, { attr } from '@ember-data/model';
 
-@classic
 export default class File extends Model {
-  @attr()
-  uri;
-
-  @attr()
-  filename;
-
-  @attr()
-  format;
-
-  @attr()
-  size;
-
-  @attr('string', {defaultValue: 'n/a'})
-  extension;
-
-  @attr('datetime')
-  created;
+  @attr() uri;
+  @attr() filename;
+  @attr() format;
+  @attr() size;
+  @attr('string', {defaultValue: 'n/a'}) extension;
+  @attr('datetime') created;
 
   @computed('size')
   get humanReadableSize() {

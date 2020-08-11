@@ -1,96 +1,63 @@
-import classic from 'ember-classic-decorator';
-import { action, computed } from '@ember/object';
-import { or } from '@ember/object/computed';
 import Controller from '@ember/controller';
-import { task } from 'ember-concurrency';
+import { action } from '@ember/object';
+import { dropTask } from 'ember-concurrency-decorators';
+import { tracked } from '@glimmer/tracking';
 
-@classic
+
 export default class ComplaintFormController extends Controller {
-  @computed('_showErrors')
-  get showErrors() {
-    return this._showErrors || {
-      name: false,
-      street: false,
-      houseNumber: false,
-      postalCode: false,
-      locality: false,
-      telephone: false,
-      email: false,
-      content: false
-    };
-  }
+  @tracked showErrors = new ShowErrors()
 
-  set showErrors(value) {
-    this.set('_showErrors', value);
-    return this._showErrors;
-  }
-
-  @computed('showErrors.name', 'model.validations.attrs.name.isInvalid')
   get nameIsInvalid() {
     return this.showErrors.name && this.model.get('validations.attrs.name.isInvalid');
   }
 
-  @computed('showErrors.street', 'model.validations.attrs.street.isInvalid')
   get streetIsInvalid() {
     return this.showErrors.street && this.model.get('validations.attrs.street.isInvalid');
   }
 
-  @computed('showErrors.houseNumber', 'model.validations.attrs.houseNumber.isInvalid')
   get houseNumberIsInvalid() {
     return this.showErrors.houseNumber && this.model.get('validations.attrs.houseNumber.isInvalid');
   }
 
-  @computed('showErrors.postalCode', 'model.validations.attrs.postalCode.isInvalid')
   get postalCodeIsInvalid() {
     return this.showErrors.postalCode && this.model.get('validations.attrs.postalCode.isInvalid');
   }
 
-  @computed('showErrors.locality', 'model.validations.attrs.locality.isInvalid')
   get localityIsInvalid() {
     return this.showErrors.locality && this.model.get('validations.attrs.locality.isInvalid');
   }
 
-  @computed('showErrors.telephone', 'model.validations.attrs.telephone.isInvalid')
   get telephoneIsInvalid() {
     return this.showErrors.telephone && this.model.get('validations.attrs.telephone.isInvalid');
   }
 
-  @computed('showErrors.email', 'model.validations.attrs.email.isInvalid')
   get emailIsInvalid() {
     return this.showErrors.email && this.model.get('validations.attrs.email.isInvalid');
   }
 
-  @computed('showErrors.content', 'model.validations.attrs.content.isInvalid')
   get contentIsInvalid() {
     return this.showErrors.content && this.model.get('validations.attrs.content.isInvalid');
   }
 
-  @or(
-    'nameIsInvalid',
-    'streetIsInvalid',
-    'houseNumberIsInvalid',
-    'postalCodeIsInvalid',
-    'localityIsInvalid',
-    'telephoneIsInvalid',
-    'emailIsInvalid',
-    'contentIsInvalid'
-  )
-  formIsInvalid;
+  get formIsInvalid() {
+    return this.nameIsInvalid || this.streetIsInvalid || this.houseNumberIsInvalid || this.postalCodeIsInvalid ||
+           this.localityIsInvalid || this.telephoneIsInvalid || this.emailIsInvalid || this.contentIsInvalid;
+  }
 
-  @(task(function*() {
+  @dropTask
+  *saveComplaint() {
     try {
       let complaint = this.model;
-      complaint.set('created', new Date());
+      complaint.created = new Date();
       yield complaint.save();
     } catch (e) {
-      this.set('saveComplaintError', e.message);
+      this.saveComplaintError = e.message;
     }
-  }).drop())
-  saveComplaint;
+  }
 
   @action
   submitComplaint() {
-    this.set('saveComplaintError', null);
+    this.saveComplaintError = null;
     this.saveComplaint.perform();
     if (!this.saveComplaintError) {
       this.transitionToRoute('confirmation');
@@ -105,5 +72,40 @@ export default class ComplaintFormController extends Controller {
   @action
   deleteFile(file) {
     this.model.attachments.removeObject(file);
+  }
+}
+
+class ShowErrors {
+  @tracked name;
+  @tracked street;
+  @tracked houseNumber;
+  @tracked postalCode;
+  @tracked locality;
+  @tracked telephone;
+  @tracked email;
+  @tracked content;
+
+  constructor() {
+    this.name = false;
+    this.street = false;
+    this.houseNumber = false;
+    this.postalCode = false;
+    this.locality = false;
+    this.telephone = false;
+    this.email = false;
+    this.content = false;
+  }
+
+  get errorObject() {
+    return {
+      name: this.name,
+      street: this.street,
+      houseNumber: this.houseNumber,
+      postalCode: this.postalCode,
+      locality: this.locality,
+      telephone: this.telephone,
+      email: this.email,
+      content: this.content
+    }
   }
 }

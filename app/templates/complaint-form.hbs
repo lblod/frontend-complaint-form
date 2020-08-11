@@ -6,7 +6,7 @@
         <div class="alert__title">Gelieve de velden van uw bericht na te kijken</div>
         <div class="alert__message">
           <ul class="bullet-list">
-            {{#each-in this.showErrors as |field value|}}
+            {{#each-in this.showErrors.errorObject as |field value|}}
               {{#if value}}
                 {{#if (v-get this.model field "isInvalid")}}
                   <li>{{v-get this.model field "message"}}</li>
@@ -150,7 +150,7 @@
         {{this.saveComplaintError}}
       {{/if}}
     </div>
-    <button {{action "submitComplaint"}} disabled={{v-get this.model "isInvalid"}} class="button" role="button">Bericht verzenden</button>
+    <button {{action "submitComplaint"}} disabled={{v-get this.model "isInvalid"}} class="button" role="button" type="submit">Bericht verzenden</button>
   </form>
 </div>
 
