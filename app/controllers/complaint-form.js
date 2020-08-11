@@ -3,7 +3,6 @@ import { action } from '@ember/object';
 import { dropTask } from 'ember-concurrency-decorators';
 import { tracked } from '@glimmer/tracking';
 
-
 export default class ComplaintFormController extends Controller {
   @tracked showErrors = new ShowErrors()
 
@@ -96,7 +95,7 @@ class ShowErrors {
     this.content = false;
   }
 
-  get errorObject() {
+  get showErrorObject() {
     return {
       name: this.name,
       street: this.street,

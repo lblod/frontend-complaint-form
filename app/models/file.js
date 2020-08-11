@@ -1,4 +1,3 @@
-import { computed } from '@ember/object';
 import Model, { attr } from '@ember-data/model';
 
 export default class File extends Model {
@@ -9,7 +8,6 @@ export default class File extends Model {
   @attr('string', {defaultValue: 'n/a'}) extension;
   @attr('datetime') created;
 
-  @computed('size')
   get humanReadableSize() {
     //ripped from https://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript
     const bytes = this.size;
@@ -19,7 +17,6 @@ export default class File extends Model {
     return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
   }
 
-  @computed('humanReadableSize', 'extension')
   get miniatureMetadata() {
     return `${this.extension.toUpperCase()} - ${this.humanReadableSize}`;
   }

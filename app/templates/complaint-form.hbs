@@ -6,7 +6,7 @@
         <div class="alert__title">Gelieve de velden van uw bericht na te kijken</div>
         <div class="alert__message">
           <ul class="bullet-list">
-            {{#each-in this.showErrors.errorObject as |field value|}}
+            {{#each-in this.showErrors.showErrorObject as |field value|}}
               {{#if value}}
                 {{#if (v-get this.model field "isInvalid")}}
                   <li>{{v-get this.model field "message"}}</li>
@@ -30,7 +30,7 @@
       <label class="form__label">
         Naam
         <span class="form__required">*</span>
-        <Input @value={{this.model.name}} class={{if this.nameIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block"}} @focus-out={{action (mut this.showErrors.name) true}} />
+        <Input @value={{this.model.name}} class={{if this.nameIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block"}} @focus-out={{fn (mut this.showErrors.name) true}} />
       </label>
       {{#if this.nameIsInvalid}}
         <p class="small form__error-message">Gelieve dit veld in te vullen.</p>
@@ -48,7 +48,7 @@
           <label class="form__label">
             Straat
             <span class="form__required">*</span>
-            <Input @value={{this.model.street}} class={{if this.streetIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block"}} @focus-out={{action (mut this.showErrors.street) true}} />
+            <Input @value={{this.model.street}} class={{if this.streetIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block"}} @focus-out={{fn (mut this.showErrors.street) true}} />
           </label>
           {{#if this.streetIsInvalid}}
             <p class="small form__error-message">Gelieve dit veld in te vullen.</p>
@@ -58,7 +58,7 @@
           <label class="form__label">
             Huisnummer
             <span class="form__required">*</span>
-            <Input @value={{this.model.houseNumber}} class={{if this.houseNumberIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block"}} @focus-out={{action (mut this.showErrors.houseNumber) true}} />
+            <Input @value={{this.model.houseNumber}} class={{if this.houseNumberIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block"}} @focus-out={{fn (mut this.showErrors.houseNumber) true}} />
           </label>
           {{#if this.houseNumberIsInvalid}}
             <p class="small form__error-message">Geef een geldig huisnummer op.</p>
@@ -79,7 +79,7 @@
           <label class="form__label">
             Gemeente of Stad
             <span class="form__required">*</span>
-            <Input @value={{this.model.locality}} class={{if this.localityIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block"}} @focus-out={{action (mut this.showErrors.locality) true}} />
+            <Input @value={{this.model.locality}} class={{if this.localityIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block"}} @focus-out={{fn (mut this.showErrors.locality) true}} />
           </label>
           {{#if this.localityIsInvalid}}
             <p class="small form__error-message">Gelieve dit veld in te vullen.</p>
@@ -89,7 +89,7 @@
           <label class="form__label">
             Postcode
             <span class="form__required">*</span>
-            <Input @value={{this.model.postalCode}} class={{if this.postalCodeIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block"}} @focus-out={{action (mut this.showErrors.postalCode) true}} />
+            <Input @value={{this.model.postalCode}} class={{if this.postalCodeIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block"}} @focus-out={{fn (mut this.showErrors.postalCode) true}} />
           </label>
           {{#if this.postalCodeIsInvalid}}
             <p class="small form__error-message">Geef een geldige postcode op.</p>
@@ -101,7 +101,7 @@
     <div class="form__row">
       <label class="form__label">
         Telefoonnummer
-        <Input @value={{this.model.telephone}} class={{if this.telephoneIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block"}} @focus-out={{action (mut this.showErrors.telephone) true}} />
+        <Input @value={{this.model.telephone}} class={{if this.telephoneIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block"}} @focus-out={{fn (mut this.showErrors.telephone) true}} />
       </label>
       {{#if this.telephoneIsInvalid}}
         <p class="small form__error-message">Geef een geldig telefoonnummer op.</p>
@@ -112,7 +112,7 @@
       <label class="form__label">
         Mailadres
         <span class="form__required">*</span>
-        <Input @value={{this.model.email}} class={{if this.emailIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block"}} @focus-out={{action (mut this.showErrors.email) true}} />
+        <Input @value={{this.model.email}} class={{if this.emailIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block"}} @focus-out={{fn (mut this.showErrors.email) true}} />
       </label>
       {{#if this.emailIsInvalid}}
         <p class="small form__error-message">Geef een geldig mailadres op.</p>
@@ -123,7 +123,7 @@
       <label class="form__label">
         Omschrijving klacht
         <span class="form__required">*</span>
-        <Textarea @value={{this.model.content}} class={{if this.contentIsInvalid "textarea textarea--block component u-spacer--tiny textarea--error" "textarea textarea--block component u-spacer--tiny"}} @focus-out={{action (mut this.showErrors.content) true}} @rows="5" />      </label>
+        <Textarea @value={{this.model.content}} class={{if this.contentIsInvalid "textarea textarea--block component u-spacer--tiny textarea--error" "textarea textarea--block component u-spacer--tiny"}} @focus-out={{fn (mut this.showErrors.content) true}} @rows="5" />      </label>
       {{#if this.contentIsInvalid}}
         <p class="small form__error-message">Gelieve dit veld in te vullen.</p>
       {{/if}}
@@ -139,9 +139,9 @@
       <label class="form__label">Bijlagen</label>
       <div>
         {{#each this.model.attachments as |attachment|}}
-          <VoMuFileCard @file={{attachment}} @downloadable={{false}} @onDelete={{action "deleteFile"}} />
+          <VoMuFileCard @file={{attachment}} @downloadable={{false}} @onDelete={{this.deleteFile}} />
         {{/each}}
-        <VoMuFileDropzone @onFinishUpload={{action "attachFile"}} @maxFileSizeMB={{1024}} />
+        <VoMuFileDropzone @onFinishUpload={{this.attachFile}} @maxFileSizeMB={{1024}} />
       </div>
     </div>
 
@@ -150,7 +150,7 @@
         {{this.saveComplaintError}}
       {{/if}}
     </div>
-    <button {{action "submitComplaint"}} disabled={{v-get this.model "isInvalid"}} class="button" role="button" type="submit">Bericht verzenden</button>
+    <button {{on "click" this.submitComplaint}} disabled={{v-get this.model "isInvalid"}} class="button" role="button" type="submit">Bericht verzenden</button>
   </form>
 </div>
 
