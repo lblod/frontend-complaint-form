@@ -77,3 +77,32 @@
 .lokaalbestuur-vlaanderen {
   overflow: hidden;
 }
+
+// Override button color
+.au-c-button {
+  &,
+  &:visited {
+    color: $au-button-color;
+    background-color: #518216;
+    border: $au-button-border solid #518216;
+  }
+
+  &:hover,
+  &:focus {
+    color: $au-button-color;
+    background-color: #497414;
+  }
+
+  &:active {
+    background-color: #518216;
+  }
+
+  &.is-disabled,
+  &.is-disabled:hover,
+  &.is-disabled:focus,
+  &.is-disabled:active {
+    color: $au-gray-900;
+    background-color: $au-gray-300;
+    border: $au-button-border solid $au-gray-300;
+  }
+}
