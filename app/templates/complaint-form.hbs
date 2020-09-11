@@ -1,142 +1,139 @@
 <div class="lokaalbestuur-vlaanderen">
   {{#if this.formIsInvalid}}
-    <div class="alert alert--error">
-      <div class="alert__icon" aria-hidden="true"></div>
-      <div class="alert__content">
-        <div class="alert__title">Gelieve de velden van uw bericht na te kijken</div>
-        <div class="alert__message">
-          <ul class="bullet-list">
-            {{#each-in this.showErrors.showErrorObject as |field value|}}
-              {{#if value}}
-                {{#if (v-get this.model field "isInvalid")}}
-                  <li>{{v-get this.model field "message"}}</li>
-                {{/if}}
-              {{/if}}
-            {{/each-in}}
-          </ul>
-        </div>
-      </div>
-    </div>
+    <AuAlert @alertIcon="alert-triangle" @alertTitle="Gelieve de velden van uw bericht na te kijken" @alertskin="error">
+      <ul class="au-c-bullet-list">
+        {{#each-in this.showErrors.showErrorObject as |field value|}}
+          {{#if value}}
+            {{#if (v-get this.model field "isInvalid")}}
+              <li>{{v-get this.model field "message"}}</li>
+            {{/if}}
+          {{/if}}
+        {{/each-in}}
+      </ul>
+    </AuAlert>
   {{/if}}
 
-  <p class="u-spacer">
-    U kan klacht indienen tegen de werking van een lokaal bestuur. Meer informatie
-    over klacht indienen kan u vinden op:
-    <a href="https://lokaalbestuur.vlaanderen.be/klachtenwegwijzer">https://lokaalbestuur.vlaanderen.be/klachtenwegwijzer</a>.
-  </p>
+  <AuContent @skin="large" class="au-u-margin-bottom">
+    <p>
+      U kan klacht indienen tegen de werking van een lokaal bestuur. Meer informatie
+      over klacht indienen kan u vinden op:
+      <a href="https://lokaalbestuur.vlaanderen.be/klachtenwegwijzer" class="au-c-link">https://lokaalbestuur.vlaanderen.be/klachtenwegwijzer</a>.
+    </p>
+  </AuContent>
 
-  <form>
-    <div class="form__row">
-      <label class="form__label">
+  <form class="au-o-flow">
+    <div>
+      <AuLabel for="complaint-name" @error="{{this.nameIsInvalid}}">
         Naam
-        <span class="form__required">*</span>
-        <Input @value={{this.model.name}} class={{if this.nameIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block"}} @focus-out={{fn (mut this.showErrors.name) true}} />
-      </label>
+        <AuPill>Verplicht</AuPill>
+      </AuLabel>
+      <Input id="complaint-name" @value={{this.model.name}} class={{if this.nameIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} @focus-out={{fn (mut this.showErrors.name) true}} />
       {{#if this.nameIsInvalid}}
-        <p class="small form__error-message">Gelieve dit veld in te vullen.</p>
+        <AuHelpText @error="true">Gelieve dit veld in te vullen.</AuHelpText>
       {{/if}}
+    </div>
 
-      <label class="form__label">
+    <div>
+      <AuLabel for="complaint-name-contact">
         Contactpersoon indien vereniging
-        <Input @value={{this.model.contactPersonName}} class="input-field input-field--block" />
-      </label>
+      </AuLabel>
+      <Input id="complaint-name-contact" @value={{this.model.contactPersonName}} class="au-c-input au-c-input--block" />
     </div>
 
-    <div class="form__row">
-      <div class="grid">
-        <div class="col--6-12 col--12-12--s">
-          <label class="form__label">
+    <div>
+      <div class="au-o-grid au-o-grid--small">
+        <div class="au-o-grid__item au-u-2-4@medium">
+          <AuLabel for="complaint-street" @error="{{this.streetIsInvalid}}">
             Straat
-            <span class="form__required">*</span>
-            <Input @value={{this.model.street}} class={{if this.streetIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block"}} @focus-out={{fn (mut this.showErrors.street) true}} />
-          </label>
+            <AuPill>Verplicht</AuPill>
+          </AuLabel>
+          <Input id="complaint-street" @value={{this.model.street}} class={{if this.streetIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} @focus-out={{fn (mut this.showErrors.street) true}} />
           {{#if this.streetIsInvalid}}
-            <p class="small form__error-message">Gelieve dit veld in te vullen.</p>
+            <AuHelpText @error="true">Gelieve dit veld in te vullen.</AuHelpText>
           {{/if}}
         </div>
-        <div class="col--3-12 col--6-12--s">
-          <label class="form__label">
+        <div class="au-o-grid__item au-u-1-4@medium">
+          <AuLabel for="complaint-number" @error="{{this.houseNumberIsInvalid}}">
             Huisnummer
-            <span class="form__required">*</span>
-            <Input @value={{this.model.houseNumber}} class={{if this.houseNumberIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block"}} @focus-out={{fn (mut this.showErrors.houseNumber) true}} />
-          </label>
+            <AuPill>Verplicht</AuPill>
+          </AuLabel>
+          <Input id="complaint-number" @value={{this.model.houseNumber}} class={{if this.houseNumberIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} @focus-out={{fn (mut this.showErrors.houseNumber) true}} />
           {{#if this.houseNumberIsInvalid}}
-            <p class="small form__error-message">Geef een geldig huisnummer op.</p>
+            <AuHelpText @error="true">Geef een geldig huisnummer op.</AuHelpText>
           {{/if}}
         </div>
-        <div class="col--3-12 col--6-12--s">
-          <label class="form__label">
+        <div class="au-o-grid__item au-u-1-4@medium">
+          <AuLabel for="complaint-addition">
             Toevoeging
-            <Input @value={{this.model.addressComplement}} class="input-field input-field--block" />
-          </label>
+          </AuLabel>
+          <Input id="complaint-addition" @value={{this.model.addressComplement}} class="au-c-input au-c-input--block" />
         </div>
-      </div>
-    </div>
 
-    <div class="form__row">
-      <div class="grid">
-        <div class="col--8-12 col--12-12--xs">
-          <label class="form__label">
+        <div class="au-o-grid__item au-u-2-3@medium">
+          <AuLabel for="complaint-city" @error="{{this.localityIsInvalid}}">
             Gemeente of Stad
-            <span class="form__required">*</span>
-            <Input @value={{this.model.locality}} class={{if this.localityIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block"}} @focus-out={{fn (mut this.showErrors.locality) true}} />
-          </label>
+            <AuPill>Verplicht</AuPill>
+          </AuLabel>
+          <Input id="complaint-city" @value={{this.model.locality}} class={{if this.localityIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} @focus-out={{fn (mut this.showErrors.locality) true}} />
           {{#if this.localityIsInvalid}}
-            <p class="small form__error-message">Gelieve dit veld in te vullen.</p>
+            <AuHelpText @error="true">Gelieve dit veld in te vullen.</AuHelpText>
           {{/if}}
         </div>
-        <div class="col--4-12 col--12-12--xs">
-          <label class="form__label">
+        <div class="au-o-grid__item au-u-1-3@medium">
+          <AuLabel for="complaint-zip" @error="{{this.postalCodeIsInvalid}}">
             Postcode
-            <span class="form__required">*</span>
-            <Input @value={{this.model.postalCode}} class={{if this.postalCodeIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block"}} @focus-out={{fn (mut this.showErrors.postalCode) true}} />
-          </label>
+            <AuPill>Verplicht</AuPill>
+          </AuLabel>
+          <Input id="complaint-zip" @value={{this.model.postalCode}} class={{if this.postalCodeIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} @focus-out={{fn (mut this.showErrors.postalCode) true}} />
           {{#if this.postalCodeIsInvalid}}
-            <p class="small form__error-message">Geef een geldige postcode op.</p>
+            <AuHelpText @error="true">Geef een geldige postcode op.</AuHelpText>
           {{/if}}
         </div>
       </div>
     </div>
 
-    <div class="form__row">
-      <label class="form__label">
+    <div>
+      <AuLabel for="complaint-phone" @error="{{this.telephoneIsInvalid}}">
         Telefoonnummer
-        <Input @value={{this.model.telephone}} class={{if this.telephoneIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block"}} @focus-out={{fn (mut this.showErrors.telephone) true}} />
-      </label>
+      </AuLabel>
+      <Input id="complaint-phone" @value={{this.model.telephone}} class={{if this.telephoneIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} @focus-out={{fn (mut this.showErrors.telephone) true}} />
       {{#if this.telephoneIsInvalid}}
-        <p class="small form__error-message">Geef een geldig telefoonnummer op.</p>
+        <AuHelpText @error="true">Geef een geldig telefoonnummer op.</AuHelpText>
       {{/if}}
     </div>
 
-    <div class="form__row">
-      <label class="form__label">
+    <div>
+      <AuLabel for="complaint-mail" @error="{{this.emailIsInvalid}}">
         Mailadres
-        <span class="form__required">*</span>
-        <Input @value={{this.model.email}} class={{if this.emailIsInvalid "input-field input-field--block input-field--error" "input-field input-field--block"}} @focus-out={{fn (mut this.showErrors.email) true}} />
-      </label>
+        <AuPill>Verplicht</AuPill>
+      </AuLabel>
+      <Input id="complaint-mail" @value={{this.model.email}} class={{if this.emailIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} @focus-out={{fn (mut this.showErrors.email) true}} />
       {{#if this.emailIsInvalid}}
-        <p class="small form__error-message">Geef een geldig mailadres op.</p>
+        <AuHelpText @error="true">Geef een geldig mailadres op.</AuHelpText>
       {{/if}}
     </div>
 
-    <div class="form__row">
-      <label class="form__label">
+    <div>
+      <AuLabel for="complaint-complaint" @error="{{this.contentIsInvalid}}">
         Omschrijving klacht
-        <span class="form__required">*</span>
-        <Textarea @value={{this.model.content}} class={{if this.contentIsInvalid "textarea textarea--block component u-spacer--tiny textarea--error" "textarea textarea--block component u-spacer--tiny"}} @focus-out={{fn (mut this.showErrors.content) true}} @rows="5" />      </label>
+        <AuPill>Verplicht</AuPill>
+      </AuLabel>
+      <Textarea id="complaint-complaint" @value={{this.model.content}} class={{if this.contentIsInvalid "au-c-textarea au-c-textarea--block" "au-c-textarea au-c-textarea--block"}} @focus-out={{fn (mut this.showErrors.content) true}} @rows="5" />
       {{#if this.contentIsInvalid}}
-        <p class="small form__error-message">Gelieve dit veld in te vullen.</p>
+        <AuHelpText @error="true">Gelieve dit veld in te vullen.</AuHelpText>
       {{/if}}
-      <p class="smaller">
+      <AuHelpText>
         Beschrijf zo duidelijk mogelijk wat uw klacht inhoudt: wie, wat, waar en
         wanneer. Geef aan tegen welke handelingen of beslissingen van welk bestuur
         u klacht wenst in te dienen, en wat zijn de concrete feiten/handelingen
         waarover u klacht wil indienen.
-      </p>
+      </AuHelpText>
     </div>
 
-    <div class="form__row u-spacer">
-      <label class="form__label">Bijlagen</label>
+    <div>
+      <AuLabel for="complaint-attachment">
+        Bijlagen
+      </AuLabel>
       <div>
         {{#each this.model.attachments as |attachment|}}
           <VoMuFileCard @file={{attachment}} @downloadable={{false}} @onDelete={{this.deleteFile}} />
@@ -150,7 +147,8 @@
         {{this.saveComplaintError}}
       {{/if}}
     </div>
-    <button {{on "click" this.submitComplaint}} disabled={{v-get this.model "isInvalid"}} class="button" role="button" type="submit">Bericht verzenden</button>
+
+    <AuButton {{on "click" this.submitComplaint}} @size="large" @disabled="{{v-get this.model "isInvalid"}}" type="submit">Bericht verzenden</AuButton>
   </form>
 </div>
 

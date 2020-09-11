@@ -1,13 +1,5 @@
-<div class="lokaalbestuur-vlaanderen">
-  <div class="alert alert--success">
-    <div class="alert__icon" aria-hidden="true"></div>
-    <div class="alert__content">
-      <div class="alert__title">Bericht verzonden.</div>
-      <div class="alert__message">
-        <p>Bedankt voor uw bericht. U krijgt een bevestiging op het opgegeven mailadres.</p>
-      </div>
-    </div>
-  </div>
-</div>
+<AuAlert @alertIcon="check" @alertTitle="Bericht verzonden." @alertskin="success">
+  <p>Bedankt voor uw bericht. U krijgt een bevestiging op het opgegeven mailadres.</p>
+</AuAlert>
 
 {{outlet}}
