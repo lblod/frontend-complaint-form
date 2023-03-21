@@ -12,7 +12,7 @@ export default class ApplicationRoute extends Route {
     const resizeObserver = new ResizeObserver((entries) => {
       let body = entries[0].target;
       let newHeight = body.clientHeight;
-      window.parent.postMessage({ height: newHeight });
+      window.parent.postMessage({ height: newHeight }, '*');
     });
 
     resizeObserver.observe(document.body);
