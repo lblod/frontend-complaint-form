@@ -25,7 +25,7 @@
     "test:ember": "ember test"
   },
   "devDependencies": {
-    "@appuniversum/ember-appuniversum": "0.0.29",
+    "@appuniversum/ember-appuniversum": "2.18.0",
     "@babel/eslint-parser": "^7.21.3",
     "@babel/plugin-proposal-decorators": "^7.21.0",
     "@ember-data/adapter": "^3.20.0",
@@ -71,7 +71,6 @@
     "ember-resolver": "^10.0.0",
     "ember-source": "~4.12.0",
     "ember-template-lint": "^5.7.2",
-    "ember-welcome-page": "^7.0.1",
     "eslint": "^8.37.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-ember": "^11.5.0",
@@ -86,7 +85,6 @@
     "stylelint": "^15.4.0",
     "stylelint-config-standard": "^32.0.0",
     "stylelint-prettier": "^3.0.0",
-    "svgxuse": "^1.2.6",
     "tracked-built-ins": "^3.1.1",
     "webpack": "^5.78.0"
   },
