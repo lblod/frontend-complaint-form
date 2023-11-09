@@ -1,4 +1,4 @@
-{{#file-dropzone class="au-c-upload" ondrop=(action "onDrop") name=queueName as |dropzone queue|}}
+<FileDropzone @class="au-c-upload" @ondrop={{action "onDrop"}} @name={{queueName}} as |dropzone queue|>
   {{#if dropzone.active}}
     <label class="au-c-upload-message">
       <AuIcon @icon="attachment" @alignment="left" />
@@ -29,7 +29,7 @@
       </span>
     </FileUpload>
   {{/if}}
-{{/file-dropzone}}
+</FileDropzone>
 {{#if hasErrors}}
   <AuAlert @alertIcon="alert-triangle" @alertskin="error" class="au-u-margin-top-tiny">
     <ul>

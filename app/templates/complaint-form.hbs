@@ -19,7 +19,7 @@
         Naam
         <AuPill>Verplicht</AuPill>
       </AuLabel>
-      <Input id="complaint-name" @value={{this.model.name}} class={{if this.nameIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} @focus-out={{fn (mut this.showErrors.name) true}} />
+      <Input id="complaint-name" @value={{this.model.name}} class={{if this.nameIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} {{on "focusout" (fn (mut this.showErrors.name) true)}} />
       {{#if this.nameIsInvalid}}
         <AuHelpText @error="true">Gelieve dit veld in te vullen.</AuHelpText>
       {{/if}}
@@ -39,7 +39,7 @@
             Straat
             <AuPill>Verplicht</AuPill>
           </AuLabel>
-          <Input id="complaint-street" @value={{this.model.street}} class={{if this.streetIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} @focus-out={{fn (mut this.showErrors.street) true}} />
+          <Input id="complaint-street" @value={{this.model.street}} class={{if this.streetIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} {{on "focusout" (fn (mut this.showErrors.street) true)}} />
           {{#if this.streetIsInvalid}}
             <AuHelpText @error="true">Gelieve dit veld in te vullen.</AuHelpText>
           {{/if}}
@@ -49,7 +49,7 @@
             Huisnummer
             <AuPill>Verplicht</AuPill>
           </AuLabel>
-          <Input id="complaint-number" @value={{this.model.houseNumber}} class={{if this.houseNumberIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} @focus-out={{fn (mut this.showErrors.houseNumber) true}} />
+          <Input id="complaint-number" @value={{this.model.houseNumber}} class={{if this.houseNumberIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} {{on "focusout" (fn (mut this.showErrors.houseNumber) true)}} />
           {{#if this.houseNumberIsInvalid}}
             <AuHelpText @error="true">Geef een geldig huisnummer op.</AuHelpText>
           {{/if}}
@@ -66,7 +66,7 @@
             Gemeente of Stad
             <AuPill>Verplicht</AuPill>
           </AuLabel>
-          <Input id="complaint-city" @value={{this.model.locality}} class={{if this.localityIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} @focus-out={{fn (mut this.showErrors.locality) true}} />
+          <Input id="complaint-city" @value={{this.model.locality}} class={{if this.localityIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} {{on "focusout" (fn (mut this.showErrors.locality) true)}} />
           {{#if this.localityIsInvalid}}
             <AuHelpText @error="true">Gelieve dit veld in te vullen.</AuHelpText>
           {{/if}}
@@ -76,7 +76,7 @@
             Postcode
             <AuPill>Verplicht</AuPill>
           </AuLabel>
-          <Input id="complaint-zip" @value={{this.model.postalCode}} class={{if this.postalCodeIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} @focus-out={{fn (mut this.showErrors.postalCode) true}} />
+          <Input id="complaint-zip" @value={{this.model.postalCode}} class={{if this.postalCodeIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} {{on "focusout" (fn (mut this.showErrors.postalCode) true)}} />
           {{#if this.postalCodeIsInvalid}}
             <AuHelpText @error="true">Geef een geldige postcode op.</AuHelpText>
           {{/if}}
@@ -88,7 +88,7 @@
       <AuLabel for="complaint-phone" @error="{{this.telephoneIsInvalid}}">
         Telefoonnummer
       </AuLabel>
-      <Input id="complaint-phone" @value={{this.model.telephone}} class={{if this.telephoneIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} @focus-out={{fn (mut this.showErrors.telephone) true}} />
+      <Input id="complaint-phone" @value={{this.model.telephone}} class={{if this.telephoneIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} {{on "focusout" (fn (mut this.showErrors.telephone) true)}} />
       {{#if this.telephoneIsInvalid}}
         <AuHelpText @error="true">Geef een geldig telefoonnummer op.</AuHelpText>
       {{/if}}
@@ -99,7 +99,7 @@
         Mailadres
         <AuPill>Verplicht</AuPill>
       </AuLabel>
-      <Input id="complaint-mail" @value={{this.model.email}} class={{if this.emailIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} @focus-out={{fn (mut this.showErrors.email) true}} />
+      <Input id="complaint-mail" @value={{this.model.email}} class={{if this.emailIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} {{on "focusout" (fn (mut this.showErrors.email) true)}} />
       {{#if this.emailIsInvalid}}
         <AuHelpText @error="true">Geef een geldig mailadres op.</AuHelpText>
       {{/if}}
@@ -110,7 +110,7 @@
         Omschrijving klacht
         <AuPill>Verplicht</AuPill>
       </AuLabel>
-      <Textarea id="complaint-complaint" @value={{this.model.content}} class={{if this.contentIsInvalid "au-c-textarea au-c-textarea--block" "au-c-textarea au-c-textarea--block"}} @focus-out={{fn (mut this.showErrors.content) true}} @rows="5" />
+      <Textarea id="complaint-complaint" @value={{this.model.content}} class={{if this.contentIsInvalid "au-c-textarea au-c-textarea--block" "au-c-textarea au-c-textarea--block"}} rows="5" {{on "focusout" (fn (mut this.showErrors.content) true)}} />
       {{#if this.contentIsInvalid}}
         <AuHelpText @error="true">Gelieve dit veld in te vullen.</AuHelpText>
       {{/if}}

@@ -4,43 +4,74 @@ import { dropTask } from 'ember-concurrency-decorators';
 import { tracked } from '@glimmer/tracking';
 
 export default class ComplaintFormController extends Controller {
-  @tracked showErrors = new ShowErrors()
+  @tracked showErrors = new ShowErrors();
 
   get nameIsInvalid() {
-    return this.showErrors.name && this.model.get('validations.attrs.name.isInvalid');
+    return (
+      this.showErrors.name && this.model.get('validations.attrs.name.isInvalid')
+    );
   }
 
   get streetIsInvalid() {
-    return this.showErrors.street && this.model.get('validations.attrs.street.isInvalid');
+    return (
+      this.showErrors.street &&
+      this.model.get('validations.attrs.street.isInvalid')
+    );
   }
 
   get houseNumberIsInvalid() {
-    return this.showErrors.houseNumber && this.model.get('validations.attrs.houseNumber.isInvalid');
+    return (
+      this.showErrors.houseNumber &&
+      this.model.get('validations.attrs.houseNumber.isInvalid')
+    );
   }
 
   get postalCodeIsInvalid() {
-    return this.showErrors.postalCode && this.model.get('validations.attrs.postalCode.isInvalid');
+    return (
+      this.showErrors.postalCode &&
+      this.model.get('validations.attrs.postalCode.isInvalid')
+    );
   }
 
   get localityIsInvalid() {
-    return this.showErrors.locality && this.model.get('validations.attrs.locality.isInvalid');
+    return (
+      this.showErrors.locality &&
+      this.model.get('validations.attrs.locality.isInvalid')
+    );
   }
 
   get telephoneIsInvalid() {
-    return this.showErrors.telephone && this.model.get('validations.attrs.telephone.isInvalid');
+    return (
+      this.showErrors.telephone &&
+      this.model.get('validations.attrs.telephone.isInvalid')
+    );
   }
 
   get emailIsInvalid() {
-    return this.showErrors.email && this.model.get('validations.attrs.email.isInvalid');
+    return (
+      this.showErrors.email &&
+      this.model.get('validations.attrs.email.isInvalid')
+    );
   }
 
   get contentIsInvalid() {
-    return this.showErrors.content && this.model.get('validations.attrs.content.isInvalid');
+    return (
+      this.showErrors.content &&
+      this.model.get('validations.attrs.content.isInvalid')
+    );
   }
 
   get formIsInvalid() {
-    return this.nameIsInvalid || this.streetIsInvalid || this.houseNumberIsInvalid || this.postalCodeIsInvalid ||
-           this.localityIsInvalid || this.telephoneIsInvalid || this.emailIsInvalid || this.contentIsInvalid;
+    return (
+      this.nameIsInvalid ||
+      this.streetIsInvalid ||
+      this.houseNumberIsInvalid ||
+      this.postalCodeIsInvalid ||
+      this.localityIsInvalid ||
+      this.telephoneIsInvalid ||
+      this.emailIsInvalid ||
+      this.contentIsInvalid
+    );
   }
 
   @dropTask
@@ -104,7 +135,7 @@ class ShowErrors {
       locality: this.locality,
       telephone: this.telephone,
       email: this.email,
-      content: this.content
-    }
+      content: this.content,
+    };
   }
 }
