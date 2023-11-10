@@ -128,9 +128,15 @@
       </AuLabel>
       <div>
         {{#each this.model.attachments as |attachment|}}
-          <VoMuFileCard @file={{attachment}} @downloadable={{false}} @onDelete={{this.deleteFile}} />
+          <AuFileCard
+            @filename={{attachment.filename}}
+            @fileSize={{attachment.humanReadableSize}}
+            @downloadLink="" {{!attachment.downloadLink}}
+            @onDelete={{this.deleteFile}}/>
         {{/each}}
-        <VoMuFileDropzone @onFinishUpload={{this.attachFile}} @maxFileSizeMB={{1024}} />
+        <AuFileUpload
+          @maxFileSizeMB={{1024}}
+          @onFinishUpload={{this.attachFile}}/>
       </div>
     </div>
 
