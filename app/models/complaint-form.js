@@ -87,5 +87,5 @@ export default class ComplaintForm extends Model.extend(Validations) {
   @attr() email;
   @attr() content;
   @attr('datetime') created;
-  @hasMany('file') attachments;
+  @hasMany('file', { async: true, inverse: null }) attachments;
 }
