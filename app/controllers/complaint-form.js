@@ -102,6 +102,11 @@ export default class ComplaintFormController extends Controller {
   deleteFile(file) {
     this.model.attachments.removeObject(file);
   }
+
+  @action
+  changeModel(value, event) {
+    this.model[value] = event.target.value;
+  }
 }
 
 class ShowErrors {
