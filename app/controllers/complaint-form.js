@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
-import { dropTask } from 'ember-concurrency-decorators';
+import { task } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 
 export default class ComplaintFormController extends Controller {
@@ -74,16 +74,15 @@ export default class ComplaintFormController extends Controller {
     );
   }
 
-  @dropTask
-  *saveComplaint() {
+  saveComplaint = task({ drop: true }, async () => {
     try {
-      let complaint = this.model;
+      const complaint = this.model;
       complaint.created = new Date();
-      yield complaint.save();
+      return complaint.save();
     } catch (e) {
       this.saveComplaintError = e.message;
     }
-  }
+  });
 
   @action
   submitComplaint() {
