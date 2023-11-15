@@ -90,7 +90,8 @@ export default class ComplaintFormController extends Controller {
   });
 
   @action
-  async submitComplaint() {
+  async submitComplaint(event) {
+    event.preventDefault();
     await this.saveComplaint.perform();
     if (!this.saveComplaintError) {
       this.transitionToRoute('confirmation');
