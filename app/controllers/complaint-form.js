@@ -5,6 +5,7 @@ import { tracked } from '@glimmer/tracking';
 
 export default class ComplaintFormController extends Controller {
   @tracked showErrors = new ShowErrors();
+  @tracked saveComplaintError;
 
   get nameIsInvalid() {
     return (
@@ -76,6 +77,7 @@ export default class ComplaintFormController extends Controller {
 
   saveComplaint = task({ drop: true }, async () => {
     try {
+      this.saveComplaintError = undefined;
       const complaint = this.model;
       complaint.created = new Date();
       return complaint.save();
@@ -85,9 +87,8 @@ export default class ComplaintFormController extends Controller {
   });
 
   @action
-  submitComplaint() {
-    this.saveComplaintError = null;
-    this.saveComplaint.perform();
+  async submitComplaint() {
+    await this.saveComplaint.perform();
     if (!this.saveComplaintError) {
       this.transitionToRoute('confirmation');
     }
