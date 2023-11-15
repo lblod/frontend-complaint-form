@@ -100,7 +100,8 @@ export default class ComplaintFormController extends Controller {
   @action
   async attachFile(fileId) {
     const file = await this.store.findRecord('file', fileId);
-    this.model.attachments.pushObject(file);
+    const attachments = await this.model.attachments;
+    attachments.push(file);
   }
 
   @action
