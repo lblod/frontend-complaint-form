@@ -235,23 +235,25 @@
       </AuHelpText>
     </AuFormRow>
 
-    <div>
-      <AuLabel for="complaint-attachment">
+    <AuFormRow>
+      <AuLabel
+        for="complaint-attachment">
         Bijlagen
       </AuLabel>
-      <div>
         {{#each this.model.attachments as |attachment|}}
           <AuFileCard
+            class="au-u-margin-bottom-small full-width"
             @filename={{attachment.filename}}
             @fileSize={{attachment.humanReadableSize}}
-            @downloadLink="" {{!attachment.downloadLink}}
             @onDelete={{this.deleteFile}}/>
         {{/each}}
         <AuFileUpload
+          id="complaint-attachment"
+          class="full-width"
           @maxFileSizeMB={{1024}}
+          @multiple={{true}}
           @onFinishUpload={{this.attachFile}}/>
-      </div>
-    </div>
+    </AuFormRow>
 
     <div>
       {{#if this.saveComplaintError}}

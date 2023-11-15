@@ -1,9 +1,12 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { task } from 'ember-concurrency';
+import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
 export default class ComplaintFormController extends Controller {
+  @service store;
+
   @tracked showErrors = new ShowErrors();
   @tracked saveComplaintError;
 
@@ -95,7 +98,8 @@ export default class ComplaintFormController extends Controller {
   }
 
   @action
-  attachFile(file) {
+  async attachFile(fileId) {
+    const file = await this.store.findRecord('file', fileId);
     this.model.attachments.pushObject(file);
   }
 

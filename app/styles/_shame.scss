@@ -4,6 +4,10 @@
   margin-left: $au-unit-small + $au-unit-tiny;
 }
 
+.full-width {
+  width: 100%;
+}
+
 // Upload
 .au-c-upload {
   border: 2px dashed $au-gray-300;
