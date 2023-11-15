@@ -264,6 +264,8 @@
     <AuButton
       @size="large"
       @disabled={{v-get this.model "isInvalid"}}
+      @loading={{this.saveComplaint.isRunning}}
+      @loadingMessage="Aan het verzenden"
       type="submit"
       {{on "click" this.submitComplaint}}>
       Bericht verzenden
