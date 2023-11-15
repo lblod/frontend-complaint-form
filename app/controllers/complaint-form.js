@@ -105,6 +105,7 @@ export default class ComplaintFormController extends Controller {
 
   @action
   deleteFile(file) {
+    //TODO also delete from the server?
     this.model.attachments.removeObject(file);
   }
 
