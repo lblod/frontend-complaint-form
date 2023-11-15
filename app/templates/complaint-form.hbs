@@ -263,7 +263,7 @@
 
     <AuButton
       @size="large"
-      @disabled="{{v-get this.model "isInvalid"}}"
+      @disabled={{v-get this.model "isInvalid"}}
       type="submit"
       {{on "click" this.submitComplaint}}>
       Bericht verzenden
