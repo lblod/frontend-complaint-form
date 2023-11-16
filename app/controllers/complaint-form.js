@@ -6,6 +6,7 @@ import { tracked } from '@glimmer/tracking';
 
 export default class ComplaintFormController extends Controller {
   @service store;
+  @service router;
 
   @tracked showErrors = new ShowErrors();
   @tracked saveComplaintError;
@@ -94,7 +95,7 @@ export default class ComplaintFormController extends Controller {
     event.preventDefault();
     await this.saveComplaint.perform();
     if (!this.saveComplaintError) {
-      this.transitionToRoute('confirmation');
+      this.router.transitionTo('confirmation');
     }
   }
 
