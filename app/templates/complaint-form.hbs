@@ -1,6 +1,9 @@
-<div class="lokaalbestuur-vlaanderen">
+<div class="au-u-padding-tiny overflow-hidden">
   {{#if this.formIsInvalid}}
-    <AuAlert @alertIcon="alert-triangle" @alertTitle="Gelieve de velden van uw bericht na te kijken" @alertskin="error">
+    <AuAlert
+      @icon="alert-triangle"
+      @title="Gelieve de velden van uw bericht na te kijken"
+      @skin="error">
       <ul class="au-c-bullet-list">
         {{#each-in this.showErrors.showErrorObject as |field value|}}
           {{#if value}}
@@ -13,106 +16,209 @@
     </AuAlert>
   {{/if}}
 
-  <form class="au-o-flow">
-    <div>
-      <AuLabel for="complaint-name" @error="{{this.nameIsInvalid}}">
+  <form class="au-c-form">
+    <AuFormRow>
+      <AuLabel
+        for="complaint-name"
+        @error={{this.nameIsInvalid}}
+        @required={{true}}>
         Naam
-        <AuPill>Verplicht</AuPill>
       </AuLabel>
-      <Input id="complaint-name" @value={{this.model.name}} class={{if this.nameIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} @focus-out={{fn (mut this.showErrors.name) true}} />
+      <AuInput
+        id="complaint-name"
+        value={{this.model.name}}
+        @error={{this.nameIsInvalid}}
+        @width="block"
+        {{on "input" (fn this.changeModel "name")}}
+        {{on "focusout" (fn (mut this.showErrors.name) true)}}/>
       {{#if this.nameIsInvalid}}
-        <AuHelpText @error="true">Gelieve dit veld in te vullen.</AuHelpText>
+        <AuHelpText
+          @error={{true}}>
+          Gelieve dit veld in te vullen.
+        </AuHelpText>
       {{/if}}
-    </div>
+    </AuFormRow>
 
-    <div>
-      <AuLabel for="complaint-name-contact">
+    <AuFormRow>
+      <AuLabel
+        for="complaint-name-contact">
         Contactpersoon indien vereniging
       </AuLabel>
-      <Input id="complaint-name-contact" @value={{this.model.contactPersonName}} class="au-c-input au-c-input--block" />
-    </div>
+      <AuInput
+        id="complaint-name-contact"
+        value={{this.model.contactPersonName}}
+        {{on "input" (fn this.changeModel "contactPersonName")}}
+        @width="block"
+        />
+    </AuFormRow>
 
-    <div>
-      <div class="au-o-grid au-o-grid--small">
+    <AuFormRow>
+      <div class="au-u-flex-self-stretch au-o-grid au-o-grid--small">
         <div class="au-o-grid__item au-u-2-4@medium">
-          <AuLabel for="complaint-street" @error="{{this.streetIsInvalid}}">
+          <AuLabel
+            for="complaint-street"
+            @error={{this.streetIsInvalid}}
+            @required={{true}}>
             Straat
-            <AuPill>Verplicht</AuPill>
           </AuLabel>
-          <Input id="complaint-street" @value={{this.model.street}} class={{if this.streetIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} @focus-out={{fn (mut this.showErrors.street) true}} />
+          <AuInput
+            id="complaint-street"
+            value={{this.model.street}}
+            @error={{this.streetIsInvalid}}
+            @width="block"
+            {{on "input" (fn this.changeModel "street")}}
+            {{on "focusout" (fn (mut this.showErrors.street) true)}}/>
           {{#if this.streetIsInvalid}}
-            <AuHelpText @error="true">Gelieve dit veld in te vullen.</AuHelpText>
+            <AuHelpText
+              @error={{true}}>
+              Gelieve dit veld in te vullen.
+            </AuHelpText>
           {{/if}}
         </div>
         <div class="au-o-grid__item au-u-1-4@medium">
-          <AuLabel for="complaint-number" @error="{{this.houseNumberIsInvalid}}">
+          <AuLabel
+            for="complaint-number"
+            @error={{this.houseNumberIsInvalid}}
+            @required={{true}}>
             Huisnummer
-            <AuPill>Verplicht</AuPill>
           </AuLabel>
-          <Input id="complaint-number" @value={{this.model.houseNumber}} class={{if this.houseNumberIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} @focus-out={{fn (mut this.showErrors.houseNumber) true}} />
+          <AuInput
+            id="complaint-number"
+            value={{this.model.houseNumber}}
+            @error={{this.houseNumberIsInvalid}}
+            @width="block"
+            {{on "input" (fn this.changeModel "houseNumber")}}
+            {{on "focusout" (fn (mut this.showErrors.houseNumber) true)}}/>
           {{#if this.houseNumberIsInvalid}}
-            <AuHelpText @error="true">Geef een geldig huisnummer op.</AuHelpText>
+            <AuHelpText
+              @error={{true}}>
+              Geef een geldig huisnummer op.
+            </AuHelpText>
           {{/if}}
         </div>
         <div class="au-o-grid__item au-u-1-4@medium">
-          <AuLabel for="complaint-addition">
+          <AuLabel
+            for="complaint-addition">
             Toevoeging
           </AuLabel>
-          <Input id="complaint-addition" @value={{this.model.addressComplement}} class="au-c-input au-c-input--block" />
+          <AuInput
+            id="complaint-addition"
+            value={{this.model.addressComplement}}
+            @width="block"
+            {{on "input" (fn this.changeModel "addressComplement")}}/>
         </div>
-
+      </div>
+    </AuFormRow>
+    <AuFormRow>
+      <div class="au-u-flex-self-stretch au-o-grid au-o-grid--small">
         <div class="au-o-grid__item au-u-2-3@medium">
-          <AuLabel for="complaint-city" @error="{{this.localityIsInvalid}}">
+          <AuLabel
+            for="complaint-city"
+            @error={{this.localityIsInvalid}}
+            @required={{true}}>
             Gemeente of Stad
-            <AuPill>Verplicht</AuPill>
           </AuLabel>
-          <Input id="complaint-city" @value={{this.model.locality}} class={{if this.localityIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} @focus-out={{fn (mut this.showErrors.locality) true}} />
+          <AuInput
+            id="complaint-city"
+            value={{this.model.locality}}
+            @error={{this.localityIsInvalid}}
+            @width="block"
+            {{on "input" (fn this.changeModel "locality")}}
+            {{on "focusout" (fn (mut this.showErrors.locality) true)}} />
           {{#if this.localityIsInvalid}}
-            <AuHelpText @error="true">Gelieve dit veld in te vullen.</AuHelpText>
+            <AuHelpText
+              @error={{true}}>
+              Gelieve dit veld in te vullen.
+            </AuHelpText>
           {{/if}}
         </div>
         <div class="au-o-grid__item au-u-1-3@medium">
-          <AuLabel for="complaint-zip" @error="{{this.postalCodeIsInvalid}}">
+          <AuLabel
+            for="complaint-zip"
+            @error={{this.postalCodeIsInvalid}}
+            @required={{true}}>
             Postcode
-            <AuPill>Verplicht</AuPill>
           </AuLabel>
-          <Input id="complaint-zip" @value={{this.model.postalCode}} class={{if this.postalCodeIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} @focus-out={{fn (mut this.showErrors.postalCode) true}} />
+          <AuInput
+            id="complaint-zip"
+            value={{this.model.postalCode}}
+            @error={{this.postalCodeIsInvalid}}
+            @width="block"
+            {{on "input" (fn this.changeModel "postalCode")}}
+            {{on "focusout" (fn (mut this.showErrors.postalCode) true)}}/>
           {{#if this.postalCodeIsInvalid}}
-            <AuHelpText @error="true">Geef een geldige postcode op.</AuHelpText>
+            <AuHelpText
+              @error={{true}}>
+              Geef een geldige postcode op.
+            </AuHelpText>
           {{/if}}
         </div>
       </div>
-    </div>
+    </AuFormRow>
 
-    <div>
-      <AuLabel for="complaint-phone" @error="{{this.telephoneIsInvalid}}">
+    <AuFormRow>
+      <AuLabel
+        for="complaint-phone"
+        @error={{this.telephoneIsInvalid}}>
         Telefoonnummer
       </AuLabel>
-      <Input id="complaint-phone" @value={{this.model.telephone}} class={{if this.telephoneIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} @focus-out={{fn (mut this.showErrors.telephone) true}} />
+      <AuInput
+        id="complaint-phone"
+        value={{this.model.telephone}}
+        @error={{this.telephoneIsInvalid}}
+        @width="block"
+        {{on "input" (fn this.changeModel "telephone")}}
+        {{on "focusout" (fn (mut this.showErrors.telephone) true)}}/>
       {{#if this.telephoneIsInvalid}}
-        <AuHelpText @error="true">Geef een geldig telefoonnummer op.</AuHelpText>
+        <AuHelpText
+          @error={{true}}>
+          Geef een geldig telefoonnummer op.
+        </AuHelpText>
       {{/if}}
-    </div>
+    </AuFormRow>
 
-    <div>
-      <AuLabel for="complaint-mail" @error="{{this.emailIsInvalid}}">
+    <AuFormRow>
+      <AuLabel
+        for="complaint-mail"
+        @error={{this.emailIsInvalid}}
+        @required={{true}}>
         Mailadres
-        <AuPill>Verplicht</AuPill>
       </AuLabel>
-      <Input id="complaint-mail" @value={{this.model.email}} class={{if this.emailIsInvalid "au-c-input au-c-input--block" "au-c-input au-c-input--block"}} @focus-out={{fn (mut this.showErrors.email) true}} />
+      <AuInput
+        id="complaint-mail"
+        value={{this.model.email}}
+        @error={{this.emailIsInvalid}}
+        @width="block"
+        {{on "input" (fn this.changeModel "email")}}
+        {{on "focusout" (fn (mut this.showErrors.email) true)}}/>
       {{#if this.emailIsInvalid}}
-        <AuHelpText @error="true">Geef een geldig mailadres op.</AuHelpText>
+        <AuHelpText
+          @error={{true}}>
+          Geef een geldig mailadres op.
+        </AuHelpText>
       {{/if}}
-    </div>
+    </AuFormRow>
 
-    <div>
-      <AuLabel for="complaint-complaint" @error="{{this.contentIsInvalid}}">
+    <AuFormRow>
+      <AuLabel
+        for="complaint-complaint"
+        @error={{this.contentIsInvalid}}
+        @required={{true}}>
         Omschrijving klacht
-        <AuPill>Verplicht</AuPill>
       </AuLabel>
-      <Textarea id="complaint-complaint" @value={{this.model.content}} class={{if this.contentIsInvalid "au-c-textarea au-c-textarea--block" "au-c-textarea au-c-textarea--block"}} @focus-out={{fn (mut this.showErrors.content) true}} @rows="5" />
+      <AuTextarea
+        id="complaint-complaint"
+        value={{this.model.content}}
+        @error={{this.contentIsInvalid}}
+        @width="block"
+        rows="5"
+        {{on "input" (fn this.changeModel "content")}}
+        {{on "focusout" (fn (mut this.showErrors.content) true)}} />
       {{#if this.contentIsInvalid}}
-        <AuHelpText @error="true">Gelieve dit veld in te vullen.</AuHelpText>
+        <AuHelpText
+          @error={{true}}>
+          Gelieve dit veld in te vullen.
+        </AuHelpText>
       {{/if}}
       <AuHelpText>
         Beschrijf zo duidelijk mogelijk wat uw klacht inhoudt: wie, wat, waar en
@@ -120,19 +226,27 @@
         u klacht wenst in te dienen, en wat zijn de concrete feiten/handelingen
         waarover u klacht wil indienen.
       </AuHelpText>
-    </div>
+    </AuFormRow>
 
-    <div>
-      <AuLabel for="complaint-attachment">
+    <AuFormRow>
+      <AuLabel
+        for="complaint-attachment">
         Bijlagen
       </AuLabel>
-      <div>
         {{#each this.model.attachments as |attachment|}}
-          <VoMuFileCard @file={{attachment}} @downloadable={{false}} @onDelete={{this.deleteFile}} />
+          <AuFileCard
+            class="au-u-margin-bottom-small full-width"
+            @filename={{attachment.filename}}
+            @fileSize={{attachment.humanReadableSize}}
+            @onDelete={{this.deleteFile}}/>
         {{/each}}
-        <VoMuFileDropzone @onFinishUpload={{this.attachFile}} @maxFileSizeMB={{1024}} />
-      </div>
-    </div>
+        <AuFileUpload
+          id="complaint-attachment"
+          class="full-width"
+          @maxFileSizeMB={{1024}}
+          @multiple={{true}}
+          @onFinishUpload={{this.attachFile}}/>
+    </AuFormRow>
 
     <div>
       {{#if this.saveComplaintError}}
@@ -140,7 +254,15 @@
       {{/if}}
     </div>
 
-    <AuButton {{on "click" this.submitComplaint}} @size="large" @disabled="{{v-get this.model "isInvalid"}}" type="submit">Bericht verzenden</AuButton>
+    <AuButton
+      @size="large"
+      @disabled={{v-get this.model "isInvalid"}}
+      @loading={{this.saveComplaint.isRunning}}
+      @loadingMessage="Aan het verzenden"
+      type="submit"
+      {{on "click" this.submitComplaint}}>
+      Bericht verzenden
+    </AuButton>
   </form>
 </div>
 

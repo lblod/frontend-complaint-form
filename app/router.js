@@ -6,11 +6,11 @@ export default class Router extends EmberRouter {
   rootURL = config.rootURL;
 }
 
-Router.map(function() {
+Router.map(function () {
   this.route('complaint-form');
 
   this.route('route-not-found', {
-    path: '/*wildcard'
+    path: '/*wildcard',
   });
   this.route('confirmation', { path: '/complaint-form-confirmation' });
 });

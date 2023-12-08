@@ -6,71 +6,72 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       ignoreBlank: true,
-      message: "Het veld Naam is verplicht."
-    })
+      message: 'Het veld Naam is verplicht.',
+    }),
   ],
   street: [
     validator('presence', {
       presence: true,
       ignoreBlank: true,
-      message: "Het veld Straat is verplicht."
-    })
+      message: 'Het veld Straat is verplicht.',
+    }),
   ],
   houseNumber: [
     validator('presence', {
       presence: true,
       ignoreBlank: true,
-      message: "Het veld Huisnummer is verplicht."
+      message: 'Het veld Huisnummer is verplicht.',
     }),
     validator('number', {
       allowString: true,
-      message: "Het veld Huisnummer moet een geldig Huisnummer bevatten"
-    })
+      message: 'Het veld Huisnummer moet een geldig Huisnummer bevatten',
+    }),
   ],
   locality: [
     validator('presence', {
       presence: true,
       ignoreBlank: true,
-      message: "Het veld Gemeente of Stad is verplicht."
-    })
+      message: 'Het veld Gemeente of Stad is verplicht.',
+    }),
   ],
   postalCode: [
     validator('presence', {
       presence: true,
       ignoreBlank: true,
-      message: "Het veld Postcode is verplicht."
+      message: 'Het veld Postcode is verplicht.',
     }),
     validator('number', {
       allowString: true,
       gte: 1000,
       lt: 10000,
-      message: "Het veld Postcode moet een geldig Postcode bevatten"
-    })
+      message: 'Het veld Postcode moet een geldig Postcode bevatten',
+    }),
   ],
   telephone: [
     validator('number', {
       allowBlank: true,
       allowString: true,
-      message: "Het veld Telefoonnummer moet een geldig Telefoonnummer bevatten"
-    })
+      message:
+        'Het veld Telefoonnummer moet een geldig Telefoonnummer bevatten',
+    }),
   ],
   email: [
     validator('presence', {
       presence: true,
       ignoreBlank: true,
-      message: "Het veld Mailadres is verplicht."
+      message: 'Het veld Mailadres is verplicht.',
     }),
     validator('format', {
       type: 'email',
-      message: "Het veld Mailadres moet een geldig Mailadres bevatten"
-    })
+      message: 'Het veld Mailadres moet een geldig Mailadres bevatten',
+    }),
   ],
   content: [
     validator('presence', {
       presence: true,
       ignoreBlank: true,
-      message: "Het veld Omschrijving klacht is verplicht."
-    })
+      message: 'Het veld Omschrijving klacht is verplicht.',
+    }),
   ],
 });
 
@@ -86,5 +87,5 @@ export default class ComplaintForm extends Model.extend(Validations) {
   @attr() email;
   @attr() content;
   @attr('datetime') created;
-  @hasMany('file') attachments;
+  @hasMany('file', { async: true, inverse: null }) attachments;
 }

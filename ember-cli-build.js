@@ -2,21 +2,12 @@
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
-module.exports = function(defaults) {
-  let app = new EmberApp(defaults, {
-    // Add options here
-    'ember-cli-babel': {
-      includePolyfill: true
+module.exports = function (defaults) {
+  const app = new EmberApp(defaults, {
+    '@appuniversum/ember-appuniversum': {
+      disableWormholeElement: true,
     },
-    sassOptions: {
-      includePaths: [
-        'node_modules/@appuniversum/appuniversum',
-        'node_modules/@appuniversum/ember-appuniversum/app/styles',
-      ]
-    }
   });
-
-  app.import('node_modules/svgxuse/svgxuse.js');
 
   // Use `app.import` to add additional libraries to the generated
   // output files.
