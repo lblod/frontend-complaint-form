@@ -3,67 +3,47 @@ import { action } from '@ember/object';
 import { task } from 'ember-concurrency';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
+import { validateRecord } from '../utils/validate-record';
+import { validationSchema } from '../models/complaint-form';
 
 export default class ComplaintFormController extends Controller {
   @service store;
   @service router;
 
   @tracked showErrors = new ShowErrors();
+  @tracked errors = {};
   @tracked saveComplaintError;
 
   get nameIsInvalid() {
-    return (
-      this.showErrors.name && this.model.get('validations.attrs.name.isInvalid')
-    );
+    return this.showErrors.name && this.errors.name;
   }
 
   get streetIsInvalid() {
-    return (
-      this.showErrors.street &&
-      this.model.get('validations.attrs.street.isInvalid')
-    );
+    return this.showErrors.street && this.errors.street;
   }
 
   get houseNumberIsInvalid() {
-    return (
-      this.showErrors.houseNumber &&
-      this.model.get('validations.attrs.houseNumber.isInvalid')
-    );
+    return this.showErrors.houseNumber && this.errors.houseNumber;
   }
 
   get postalCodeIsInvalid() {
-    return (
-      this.showErrors.postalCode &&
-      this.model.get('validations.attrs.postalCode.isInvalid')
-    );
+    return this.showErrors.postalCode && this.errors.postalCode;
   }
 
   get localityIsInvalid() {
-    return (
-      this.showErrors.locality &&
-      this.model.get('validations.attrs.locality.isInvalid')
-    );
+    return this.showErrors.locality && this.errors.locality;
   }
 
   get telephoneIsInvalid() {
-    return (
-      this.showErrors.telephone &&
-      this.model.get('validations.attrs.telephone.isInvalid')
-    );
+    return this.showErrors.telephone && this.errors.telephone;
   }
 
   get emailIsInvalid() {
-    return (
-      this.showErrors.email &&
-      this.model.get('validations.attrs.email.isInvalid')
-    );
+    return this.showErrors.email && this.errors.email;
   }
 
   get contentIsInvalid() {
-    return (
-      this.showErrors.content &&
-      this.model.get('validations.attrs.content.isInvalid')
-    );
+    return this.showErrors.content && this.errors.content;
   }
 
   get formIsInvalid() {
@@ -84,7 +64,7 @@ export default class ComplaintFormController extends Controller {
       this.saveComplaintError = undefined;
       const complaint = this.model;
       complaint.created = new Date();
-      return complaint.save();
+      await complaint.save();
     } catch (e) {
       this.saveComplaintError = e.message;
     }
@@ -93,10 +73,19 @@ export default class ComplaintFormController extends Controller {
   @action
   async submitComplaint(event) {
     event.preventDefault();
-    await this.saveComplaint.perform();
-    if (!this.saveComplaintError) {
-      this.router.transitionTo('confirmation');
+
+    let result = await validateRecord(this.model, validationSchema);
+
+    if (result.isValid) {
+      this.errors = {};
+      await this.saveComplaint.perform();
+      if (!this.saveComplaintError) {
+        this.router.transitionTo('confirmation');
+      }
+    } else {
+      this.errors = result.errors;
     }
+    this.showErrors.showAll();
   }
 
   @action
@@ -114,30 +103,20 @@ export default class ComplaintFormController extends Controller {
 
   @action
   changeModel(value, event) {
+    this.showErrors[value] = false;
     this.model[value] = event.target.value;
   }
 }
 
 class ShowErrors {
-  @tracked name;
-  @tracked street;
-  @tracked houseNumber;
-  @tracked postalCode;
-  @tracked locality;
-  @tracked telephone;
-  @tracked email;
-  @tracked content;
-
-  constructor() {
-    this.name = false;
-    this.street = false;
-    this.houseNumber = false;
-    this.postalCode = false;
-    this.locality = false;
-    this.telephone = false;
-    this.email = false;
-    this.content = false;
-  }
+  @tracked name = false;
+  @tracked street = false;
+  @tracked houseNumber = false;
+  @tracked postalCode = false;
+  @tracked locality = false;
+  @tracked telephone = false;
+  @tracked email = false;
+  @tracked content = false;
 
   get showErrorObject() {
     return {
@@ -150,5 +129,16 @@ class ShowErrors {
       email: this.email,
       content: this.content,
     };
+  }
+
+  showAll() {
+    this.name = true;
+    this.street = true;
+    this.houseNumber = true;
+    this.postalCode = true;
+    this.locality = true;
+    this.telephone = true;
+    this.email = true;
+    this.content = true;
   }
 }

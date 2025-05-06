@@ -1,91 +1,62 @@
 import Model, { attr, hasMany } from '@ember-data/model';
-import { buildValidations, validator } from 'ember-cp-validations';
+import Joi from 'joi';
 
-const Validations = buildValidations({
-  name: [
-    validator('presence', {
-      presence: true,
-      ignoreBlank: true,
-      message: 'Het veld Naam is verplicht.',
-    }),
-  ],
-  street: [
-    validator('presence', {
-      presence: true,
-      ignoreBlank: true,
-      message: 'Het veld Straat is verplicht.',
-    }),
-  ],
-  houseNumber: [
-    validator('presence', {
-      presence: true,
-      ignoreBlank: true,
-      message: 'Het veld Huisnummer is verplicht.',
-    }),
-    validator('number', {
-      allowString: true,
-      message: 'Het veld Huisnummer moet een geldig Huisnummer bevatten',
-    }),
-  ],
-  locality: [
-    validator('presence', {
-      presence: true,
-      ignoreBlank: true,
-      message: 'Het veld Gemeente of Stad is verplicht.',
-    }),
-  ],
-  postalCode: [
-    validator('presence', {
-      presence: true,
-      ignoreBlank: true,
-      message: 'Het veld Postcode is verplicht.',
-    }),
-    validator('number', {
-      allowString: true,
-      gte: 1000,
-      lt: 10000,
-      message: 'Het veld Postcode moet een geldig Postcode bevatten',
-    }),
-  ],
-  telephone: [
-    validator('number', {
-      allowBlank: true,
-      allowString: true,
-      message:
-        'Het veld Telefoonnummer moet een geldig Telefoonnummer bevatten',
-    }),
-  ],
-  email: [
-    validator('presence', {
-      presence: true,
-      ignoreBlank: true,
-      message: 'Het veld Mailadres is verplicht.',
-    }),
-    validator('format', {
-      type: 'email',
-      message: 'Het veld Mailadres moet een geldig Mailadres bevatten',
-    }),
-  ],
-  content: [
-    validator('presence', {
-      presence: true,
-      ignoreBlank: true,
-      message: 'Het veld Omschrijving klacht is verplicht.',
-    }),
-  ],
-});
-
-export default class ComplaintForm extends Model.extend(Validations) {
-  @attr() name;
-  @attr() contactPersonName;
-  @attr() street;
-  @attr() houseNumber;
-  @attr() addressComplement;
-  @attr() locality;
-  @attr() postalCode;
-  @attr() telephone;
-  @attr() email;
-  @attr() content;
+export default class ComplaintForm extends Model {
+  @attr name;
+  @attr contactPersonName;
+  @attr street;
+  @attr houseNumber;
+  @attr addressComplement;
+  @attr locality;
+  @attr postalCode;
+  @attr telephone;
+  @attr email;
+  @attr content;
   @attr('datetime') created;
   @hasMany('file', { async: true, inverse: null }) attachments;
 }
+
+export const validationSchema = Joi.object({
+  name: Joi.string()
+    .empty('')
+    .required()
+    .messages({ '*': 'Het veld Naam is verplicht.' }),
+  street: Joi.string()
+    .empty('')
+    .required()
+    .messages({ '*': 'Het veld Straat is verplicht.' }),
+  houseNumber: Joi.number()
+    .integer()
+    .positive()
+    .required()
+    .messages({ '*': 'Het veld Huisnummer is verplicht.' }),
+  locality: Joi.string()
+    .empty('')
+    .required()
+    .messages({ '*': 'Het veld Gemeente of Stad is verplicht.' }),
+  postalCode: Joi.number()
+    .integer('')
+    .min(1000)
+    .less(10000)
+    .required()
+    .messages({
+      'any.required': 'Het veld Postcode is verplicht',
+      '*': 'Het veld Postcode moet een geldige postcode bevatten.',
+    }),
+  telephone: Joi.string()
+    .empty('')
+    .regex(/^(tel:)?\+?[0-9]*$/)
+    .required()
+    .messages({
+      'any.required': 'Het veld telefoonnummer is verplicht.',
+      'string.pattern.base':
+        'Het veld Telefoonnummer mag enkel een plusteken en cijfers bevatten.',
+    }),
+  email: Joi.string().empty('').email({ tlds: false }).required().messages({
+    '*': 'Het veld E-mailadres moet een geldig e-mailadres bevatten',
+  }),
+  content: Joi.string()
+    .empty('')
+    .required()
+    .messages({ '*': 'Het veld Omschrijving klacht is verplicht.' }),
+});
