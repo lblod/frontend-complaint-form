@@ -3,6 +3,7 @@ import { action } from '@ember/object';
 import { task } from 'ember-concurrency';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
+import { removeItem } from '../utils/array';
 import { validateRecord } from '../utils/validate-record';
 import { validationSchema } from '../models/complaint-form';
 
@@ -91,14 +92,15 @@ export default class ComplaintFormController extends Controller {
   @action
   async attachFile(fileId) {
     const file = await this.store.findRecord('file', fileId);
-    const attachments = await this.model.attachments;
-    attachments.push(file);
+    this.model.attachments.push(file);
   }
 
   @action
   deleteFile(file) {
-    //TODO also delete from the server?
-    this.model.attachments.removeObject(file);
+    // We can't remove the file from the server since users are unauthorized
+    // and that would mean they could remove files they didn't upload themselves as well.
+    removeItem(this.model.attachments, file);
+    this.store.unloadRecord(file);
   }
 
   @action
