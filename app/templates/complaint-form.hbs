@@ -234,7 +234,7 @@
           class="au-u-margin-bottom-small full-width"
           @filename={{attachment.filename}}
           @fileSize={{attachment.humanReadableSize}}
-          @onDelete={{this.deleteFile}}
+          @onDelete={{fn this.deleteFile attachment}}
         />
       {{/each}}
       <AuFileUpload

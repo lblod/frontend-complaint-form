@@ -13,7 +13,7 @@ export default class ComplaintForm extends Model {
   @attr email;
   @attr content;
   @attr('datetime') created;
-  @hasMany('file', { async: true, inverse: null }) attachments;
+  @hasMany('file', { async: false, inverse: null }) attachments;
 }
 
 export const validationSchema = Joi.object({
