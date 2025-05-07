@@ -54,7 +54,7 @@ module('Unit | Model | complaint form', function (hooks) {
     assert.false(result.isValid);
     assert.ok(
       result.errors.houseNumber,
-      'house number can only contain digits'
+      'house number can only contain digits',
     );
     assert.ok(result.errors.postalCode, 'postal code must be within a range');
     assert.ok(result.errors.telephone, 'telephone must be valid');

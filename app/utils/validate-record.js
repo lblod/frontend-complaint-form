@@ -54,7 +54,7 @@ function serializeRecordWithDepthControl(record, maxDepth = 2) {
       } else {
         // assert(`Unknown field type: ${type}`);
       }
-    }
+    },
   );
 
   return Object.fromEntries(entries);
