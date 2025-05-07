@@ -3,12 +3,13 @@
     <AuAlert
       @icon="alert-triangle"
       @title="Gelieve de velden van uw bericht na te kijken"
-      @skin="error">
+      @skin="error"
+    >
       <ul class="au-c-bullet-list">
         {{#each-in this.showErrors.showErrorObject as |field value|}}
           {{#if value}}
-            {{#if (v-get this.model field "isInvalid")}}
-              <li>{{v-get this.model field "message"}}</li>
+            {{#if (get this.errors field)}}
+              <li>{{get this.errors field}}</li>
             {{/if}}
           {{/if}}
         {{/each-in}}
@@ -16,12 +17,13 @@
     </AuAlert>
   {{/if}}
 
-  <form class="au-c-form">
+  <form class="au-c-form" {{on "submit" this.submitComplaint}}>
     <AuFormRow>
       <AuLabel
         for="complaint-name"
         @error={{this.nameIsInvalid}}
-        @required={{true}}>
+        @required={{true}}
+      >
         Naam
       </AuLabel>
       <AuInput
@@ -30,18 +32,16 @@
         @error={{this.nameIsInvalid}}
         @width="block"
         {{on "input" (fn this.changeModel "name")}}
-        {{on "focusout" (fn (mut this.showErrors.name) true)}}/>
+      />
       {{#if this.nameIsInvalid}}
-        <AuHelpText
-          @error={{true}}>
+        <AuHelpText @error={{true}}>
           Gelieve dit veld in te vullen.
         </AuHelpText>
       {{/if}}
     </AuFormRow>
 
     <AuFormRow>
-      <AuLabel
-        for="complaint-name-contact">
+      <AuLabel for="complaint-name-contact">
         Contactpersoon indien vereniging
       </AuLabel>
       <AuInput
@@ -49,7 +49,7 @@
         value={{this.model.contactPersonName}}
         {{on "input" (fn this.changeModel "contactPersonName")}}
         @width="block"
-        />
+      />
     </AuFormRow>
 
     <AuFormRow>
@@ -58,7 +58,8 @@
           <AuLabel
             for="complaint-street"
             @error={{this.streetIsInvalid}}
-            @required={{true}}>
+            @required={{true}}
+          >
             Straat
           </AuLabel>
           <AuInput
@@ -67,10 +68,9 @@
             @error={{this.streetIsInvalid}}
             @width="block"
             {{on "input" (fn this.changeModel "street")}}
-            {{on "focusout" (fn (mut this.showErrors.street) true)}}/>
+          />
           {{#if this.streetIsInvalid}}
-            <AuHelpText
-              @error={{true}}>
+            <AuHelpText @error={{true}}>
               Gelieve dit veld in te vullen.
             </AuHelpText>
           {{/if}}
@@ -79,7 +79,8 @@
           <AuLabel
             for="complaint-number"
             @error={{this.houseNumberIsInvalid}}
-            @required={{true}}>
+            @required={{true}}
+          >
             Huisnummer
           </AuLabel>
           <AuInput
@@ -88,24 +89,23 @@
             @error={{this.houseNumberIsInvalid}}
             @width="block"
             {{on "input" (fn this.changeModel "houseNumber")}}
-            {{on "focusout" (fn (mut this.showErrors.houseNumber) true)}}/>
+          />
           {{#if this.houseNumberIsInvalid}}
-            <AuHelpText
-              @error={{true}}>
+            <AuHelpText @error={{true}}>
               Geef een geldig huisnummer op.
             </AuHelpText>
           {{/if}}
         </div>
         <div class="au-o-grid__item au-u-1-4@medium">
-          <AuLabel
-            for="complaint-addition">
+          <AuLabel for="complaint-addition">
             Toevoeging
           </AuLabel>
           <AuInput
             id="complaint-addition"
             value={{this.model.addressComplement}}
             @width="block"
-            {{on "input" (fn this.changeModel "addressComplement")}}/>
+            {{on "input" (fn this.changeModel "addressComplement")}}
+          />
         </div>
       </div>
     </AuFormRow>
@@ -115,7 +115,8 @@
           <AuLabel
             for="complaint-city"
             @error={{this.localityIsInvalid}}
-            @required={{true}}>
+            @required={{true}}
+          >
             Gemeente of Stad
           </AuLabel>
           <AuInput
@@ -124,10 +125,9 @@
             @error={{this.localityIsInvalid}}
             @width="block"
             {{on "input" (fn this.changeModel "locality")}}
-            {{on "focusout" (fn (mut this.showErrors.locality) true)}} />
+          />
           {{#if this.localityIsInvalid}}
-            <AuHelpText
-              @error={{true}}>
+            <AuHelpText @error={{true}}>
               Gelieve dit veld in te vullen.
             </AuHelpText>
           {{/if}}
@@ -136,7 +136,8 @@
           <AuLabel
             for="complaint-zip"
             @error={{this.postalCodeIsInvalid}}
-            @required={{true}}>
+            @required={{true}}
+          >
             Postcode
           </AuLabel>
           <AuInput
@@ -145,10 +146,9 @@
             @error={{this.postalCodeIsInvalid}}
             @width="block"
             {{on "input" (fn this.changeModel "postalCode")}}
-            {{on "focusout" (fn (mut this.showErrors.postalCode) true)}}/>
+          />
           {{#if this.postalCodeIsInvalid}}
-            <AuHelpText
-              @error={{true}}>
+            <AuHelpText @error={{true}}>
               Geef een geldige postcode op.
             </AuHelpText>
           {{/if}}
@@ -157,9 +157,7 @@
     </AuFormRow>
 
     <AuFormRow>
-      <AuLabel
-        for="complaint-phone"
-        @error={{this.telephoneIsInvalid}}>
+      <AuLabel for="complaint-phone" @error={{this.telephoneIsInvalid}}>
         Telefoonnummer
       </AuLabel>
       <AuInput
@@ -168,10 +166,9 @@
         @error={{this.telephoneIsInvalid}}
         @width="block"
         {{on "input" (fn this.changeModel "telephone")}}
-        {{on "focusout" (fn (mut this.showErrors.telephone) true)}}/>
+      />
       {{#if this.telephoneIsInvalid}}
-        <AuHelpText
-          @error={{true}}>
+        <AuHelpText @error={{true}}>
           Geef een geldig telefoonnummer op.
         </AuHelpText>
       {{/if}}
@@ -181,8 +178,9 @@
       <AuLabel
         for="complaint-mail"
         @error={{this.emailIsInvalid}}
-        @required={{true}}>
-        Mailadres
+        @required={{true}}
+      >
+        E-mailadres
       </AuLabel>
       <AuInput
         id="complaint-mail"
@@ -190,11 +188,10 @@
         @error={{this.emailIsInvalid}}
         @width="block"
         {{on "input" (fn this.changeModel "email")}}
-        {{on "focusout" (fn (mut this.showErrors.email) true)}}/>
+      />
       {{#if this.emailIsInvalid}}
-        <AuHelpText
-          @error={{true}}>
-          Geef een geldig mailadres op.
+        <AuHelpText @error={{true}}>
+          Geef een geldig e-mailadres op.
         </AuHelpText>
       {{/if}}
     </AuFormRow>
@@ -203,7 +200,8 @@
       <AuLabel
         for="complaint-complaint"
         @error={{this.contentIsInvalid}}
-        @required={{true}}>
+        @required={{true}}
+      >
         Omschrijving klacht
       </AuLabel>
       <AuTextarea
@@ -213,39 +211,39 @@
         @width="block"
         rows="5"
         {{on "input" (fn this.changeModel "content")}}
-        {{on "focusout" (fn (mut this.showErrors.content) true)}} />
+      />
       {{#if this.contentIsInvalid}}
-        <AuHelpText
-          @error={{true}}>
+        <AuHelpText @error={{true}}>
           Gelieve dit veld in te vullen.
         </AuHelpText>
       {{/if}}
       <AuHelpText>
         Beschrijf zo duidelijk mogelijk wat uw klacht inhoudt: wie, wat, waar en
-        wanneer. Geef aan tegen welke handelingen of beslissingen van welk bestuur
-        u klacht wenst in te dienen, en wat zijn de concrete feiten/handelingen
-        waarover u klacht wil indienen.
+        wanneer. Geef aan tegen welke handelingen of beslissingen van welk
+        bestuur u klacht wenst in te dienen, en wat zijn de concrete
+        feiten/handelingen waarover u klacht wil indienen.
       </AuHelpText>
     </AuFormRow>
 
     <AuFormRow>
-      <AuLabel
-        for="complaint-attachment">
+      <AuLabel for="complaint-attachment">
         Bijlagen
       </AuLabel>
-        {{#each this.model.attachments as |attachment|}}
-          <AuFileCard
-            class="au-u-margin-bottom-small full-width"
-            @filename={{attachment.filename}}
-            @fileSize={{attachment.humanReadableSize}}
-            @onDelete={{this.deleteFile}}/>
-        {{/each}}
-        <AuFileUpload
-          id="complaint-attachment"
-          class="full-width"
-          @maxFileSizeMB={{1024}}
-          @multiple={{true}}
-          @onFinishUpload={{this.attachFile}}/>
+      {{#each this.model.attachments as |attachment|}}
+        <AuFileCard
+          class="au-u-margin-bottom-small full-width"
+          @filename={{attachment.filename}}
+          @fileSize={{attachment.humanReadableSize}}
+          @onDelete={{this.deleteFile}}
+        />
+      {{/each}}
+      <AuFileUpload
+        id="complaint-attachment"
+        class="full-width"
+        @maxFileSizeMB={{1024}}
+        @multiple={{true}}
+        @onFinishUpload={{this.attachFile}}
+      />
     </AuFormRow>
 
     <div>
@@ -256,11 +254,10 @@
 
     <AuButton
       @size="large"
-      @disabled={{v-get this.model "isInvalid"}}
       @loading={{this.saveComplaint.isRunning}}
       @loadingMessage="Aan het verzenden"
       type="submit"
-      {{on "click" this.submitComplaint}}>
+    >
       Bericht verzenden
     </AuButton>
   </form>
