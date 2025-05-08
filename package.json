@@ -42,6 +42,7 @@
     "@glimmer/component": "^2.0.0",
     "@glimmer/tracking": "^1.1.2",
     "@warp-drive/build-config": "~5.4.1",
+    "@warp-drive/ember": "^5.4.1",
     "broccoli-asset-rev": "^3.0.0",
     "concurrently": "^9.1.2",
     "ember-auto-import": "^2.10.0",

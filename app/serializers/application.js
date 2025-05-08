@@ -1,3 +1,3 @@
-import JSONAPISerializer from '@ember-data/serializer/json-api';
+import JSONAPIPaginationSerializer from './json-api-pagination';
 
-export default class ApplicationSerializer extends JSONAPISerializer {}
+export default class ApplicationSerializer extends JSONAPIPaginationSerializer {}
