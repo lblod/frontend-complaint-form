@@ -15,7 +15,8 @@
 }
 
 // Override button color with something green
-.au-c-button {
+// TODO: do we need this? It doesn't match Webuniversum's style guide?
+.au-c-button--green {
   &,
   &:visited {
     background-color: #518216;
