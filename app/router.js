@@ -8,9 +8,13 @@ export default class Router extends EmberRouter {
 
 Router.map(function () {
   this.route('complaint-form');
+  this.route('confirmation', { path: '/complaint-form-confirmation' });
+  this.route('complaints', { path: '/klachten' }, function () {
+    this.route('details', { path: `/:id` });
+  });
+  this.route('file-redirect', { path: '/files/:id/download' });
 
   this.route('route-not-found', {
     path: '/*wildcard',
   });
-  this.route('confirmation', { path: '/complaint-form-confirmation' });
 });
