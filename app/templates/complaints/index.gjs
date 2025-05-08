@@ -6,9 +6,9 @@ import AuLinkExternal from '@appuniversum/ember-appuniversum/components/au-link-
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { cached } from '@glimmer/tracking';
+import { getPromiseState } from '@warp-drive/ember';
 import formatDatetime from 'frontend-complaint-form/helpers/format-datetime';
 import formatTel from 'frontend-complaint-form/helpers/format-tel';
-import { getPromiseState } from '@warp-drive/ember';
 
 export default class ComplaintsIndex extends Component {
   @service store;
