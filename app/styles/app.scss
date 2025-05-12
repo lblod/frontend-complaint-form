@@ -12,6 +12,9 @@
  * SHAME: Temporary hacks and quickfixes
  */
 
+$au-flex-utilities-responsive: true;
+$au-flex-utilities-reverse-responsive-breakpoints: true;
+
 @import "@appuniversum/ember-appuniversum/styles";
 @import "./components/cards";
 
