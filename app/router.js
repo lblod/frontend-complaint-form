@@ -7,6 +7,7 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
+  this.route('mock-login');
   this.route('complaint-form');
   this.route('confirmation', { path: '/complaint-form-confirmation' });
   this.route('complaints', { path: '/klachten' }, function () {

@@ -1,11 +1,18 @@
 import Route from '@ember/routing/route';
+import { service } from '@ember/service';
 
 export default class ApplicationRoute extends Route {
+  @service session;
+
   heightChangeResizeObserver = null;
 
   constructor() {
     super(...arguments);
     this.setupHeightChangeDetection();
+  }
+
+  beforeModel() {
+    return this.session.setup();
   }
 
   setupHeightChangeDetection() {
