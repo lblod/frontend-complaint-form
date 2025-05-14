@@ -1,16 +1,42 @@
 import BaseSessionService from 'ember-simple-auth/services/session';
+import ENV from 'frontend-complaint-form/config/environment';
+import { isValidAcmidmConfig } from 'frontend-complaint-form/utils/acmidm';
 
 export default class SessionService extends BaseSessionService {
+  get isAcmIdmSession() {
+    if (!this.isAuthenticated) {
+      return false;
+    }
+
+    return this.data.authenticated.authenticator === 'authenticator:acm-idm';
+  }
+
   handleAuthentication() {
     const routeAfterAuthentication = 'complaints';
     super.handleAuthentication(routeAfterAuthentication);
   }
 
   requireAuthentication(transition) {
-    // TODO: update this logic when we add ACM/IDM logins
-    // https://github.com/lblod/frontend-dashboard/blob/8563a7dd573d9341b303a19e954f5cc4e917893e/app/services/session.js#L17
-    const loginRoute = 'mock-login';
+    const loginRoute = isValidAcmidmConfig(ENV.acmidm)
+      ? 'acmidm-login'
+      : 'mock-login';
 
     return super.requireAuthentication(transition, loginRoute);
+  }
+
+  invalidate() {
+    // We store the flag here since the data is cleared before the handleInvalidation method is called.
+    this.wasAcmIdmSession = this.isAcmIdmSession;
+    super.invalidate(...arguments);
+  }
+
+  handleInvalidation(logoutUrl) {
+    if (this.wasAcmIdmSession) {
+      logoutUrl = ENV.acmidm.logoutUrl;
+    } else {
+      logoutUrl = '/mock-login';
+    }
+
+    super.handleInvalidation(logoutUrl);
   }
 }

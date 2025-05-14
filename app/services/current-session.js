@@ -26,7 +26,6 @@ export default class CurrentSessionService extends Service {
       const accountId =
         this.session.data.authenticated.relationships.account.data.id;
 
-
       this.account = await this.store.findRecord('account', accountId, {
         include: 'user',
       });
