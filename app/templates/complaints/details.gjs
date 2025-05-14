@@ -11,6 +11,7 @@ import formatTel from 'frontend-complaint-form/helpers/format-tel';
 import { Await } from '@warp-drive/ember';
 import { pageTitle } from 'ember-page-title';
 import DataCard from 'frontend-complaint-form/components/data-card';
+import { humanReadableSize } from 'frontend-complaint-form/models/file';
 
 export default class ComplaintDetails extends Component {
   @service store;
@@ -133,7 +134,7 @@ export default class ComplaintDetails extends Component {
                               <li>
                                 <AuFileCard
                                   @filename={{file.filename}}
-                                  @fileSize={{file.humanReadableSize}}
+                                  @fileSize={{humanReadableSize file.size}}
                                   @downloadLink={{downloadLink file}}
                                 />
                               </li>
