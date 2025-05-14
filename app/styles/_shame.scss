@@ -14,8 +14,13 @@
   overflow: hidden;
 }
 
+.u-whitespace-pre-line {
+  white-space: pre-line;
+}
+
 // Override button color with something green
-.au-c-button {
+// TODO: do we need this? It doesn't match Webuniversum's style guide?
+.au-c-button--green {
   &,
   &:visited {
     background-color: #518216;
@@ -30,4 +35,12 @@
   &:active {
     background-color: #518216;
   }
+}
+
+// Mock login styles
+.mock-account-button {
+  display: block; // AuButtons are inline-flex by default
+  line-height: normal;
+  height: auto; // override the fixed height of the button height
+  border: 0.1rem #c6cdd3 solid;
 }

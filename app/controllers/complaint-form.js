@@ -6,6 +6,8 @@ import { tracked } from '@glimmer/tracking';
 import { removeItem } from '../utils/array';
 import { validateRecord } from '../utils/validate-record';
 import { validationSchema } from '../models/complaint-form';
+import { TrackedArray } from 'tracked-built-ins';
+import { humanReadableSize } from 'frontend-complaint-form/models/file';
 
 export default class ComplaintFormController extends Controller {
   @service store;
@@ -14,6 +16,7 @@ export default class ComplaintFormController extends Controller {
   @tracked showErrors = new ShowErrors();
   @tracked errors = {};
   @tracked saveComplaintError;
+  @tracked uploadedFiles = new TrackedArray([]);
 
   get nameIsInvalid() {
     return this.showErrors.name && this.errors.name;
@@ -65,6 +68,8 @@ export default class ComplaintFormController extends Controller {
       this.saveComplaintError = undefined;
       const complaint = this.model;
       complaint.created = new Date();
+
+      addAttachmentsToComplaint(complaint, this.uploadedFiles);
       await complaint.save();
     } catch (e) {
       this.saveComplaintError = e.message;
@@ -90,17 +95,19 @@ export default class ComplaintFormController extends Controller {
   }
 
   @action
-  async attachFile(fileId) {
-    const file = await this.store.findRecord('file', fileId);
-    this.model.attachments.push(file);
+  async attachFile({ fileId, file }) {
+    this.uploadedFiles.push({
+      id: fileId,
+      name: file.name,
+      size: humanReadableSize(file.size),
+    });
   }
 
   @action
   deleteFile(file) {
     // We can't remove the file from the server since users are unauthorized
     // and that would mean they could remove files they didn't upload themselves as well.
-    removeItem(this.model.attachments, file);
-    this.store.unloadRecord(file);
+    removeItem(this.uploadedFiles, file);
   }
 
   @action
@@ -143,4 +150,23 @@ class ShowErrors {
     this.email = true;
     this.content = true;
   }
+}
+
+// We're modifying the relationship directly since unauthorized users don't have access to the actual file records
+function addAttachmentsToComplaint(complaint, uploadedFiles) {
+  const SKIP_FETCH = true;
+  const attachmentsRef = complaint.hasMany('attachments');
+  const fileIds = uploadedFiles.map((file) => file.id);
+  attachmentsRef.push(idsToFileDocument(fileIds), SKIP_FETCH);
+}
+
+function idsToFileDocument(ids) {
+  return [
+    ...ids.map((id) => {
+      return {
+        type: 'file',
+        id,
+      };
+    }),
+  ];
 }
