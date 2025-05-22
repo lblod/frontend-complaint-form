@@ -229,12 +229,12 @@
       <AuLabel for="complaint-attachment">
         Bijlagen
       </AuLabel>
-      {{#each this.model.attachments as |attachment|}}
+      {{#each this.uploadedFiles as |file|}}
         <AuFileCard
           class="au-u-margin-bottom-small full-width"
-          @filename={{attachment.filename}}
-          @fileSize={{attachment.humanReadableSize}}
-          @onDelete={{fn this.deleteFile attachment}}
+          @filename={{file.name}}
+          @fileSize={{file.size}}
+          @onDelete={{fn this.deleteFile file}}
         />
       {{/each}}
       <AuFileUpload
@@ -242,7 +242,7 @@
         class="full-width"
         @maxFileSizeMB={{1024}}
         @multiple={{true}}
-        @onFinishUpload={{this.attachFile}}
+        @onUpload={{this.attachFile}}
       />
     </AuFormRow>
 
@@ -256,6 +256,7 @@
       @size="large"
       @loading={{this.saveComplaint.isRunning}}
       @loadingMessage="Aan het verzenden"
+      class="au-c-button--green"
       type="submit"
     >
       Bericht verzenden

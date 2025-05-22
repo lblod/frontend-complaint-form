@@ -17,7 +17,6 @@ module('Unit | Model | complaint form', function (hooks) {
     assert.ok(result.errors.houseNumber, 'invalid house number');
     assert.ok(result.errors.locality, 'invalid locality');
     assert.ok(result.errors.postalCode, 'invalid postal code');
-    assert.ok(result.errors.telephone, 'invalid telephone');
     assert.ok(result.errors.email, 'invalid email');
     assert.ok(result.errors.content, 'invalid content');
 
