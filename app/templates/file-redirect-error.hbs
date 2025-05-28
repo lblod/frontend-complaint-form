@@ -1,0 +1,19 @@
+<AuApp>
+  <ErrorLayout class="au-u-height-full">
+    <:title>
+      Er ging iets fout
+    </:title>
+    <:content>
+      <p>De gevraagde bijlage bestaat niet of de bijhorende klacht werd niet
+        gevonden.</p>
+    </:content>
+    <:link>
+      <AuLink @route="complaints" @skin="button" class="au-u-margin-top">
+        Terug naar het overzicht
+      </AuLink>
+    </:link>
+    <:decoration>
+      <img src="/assets/images/status/page-not-found.svg" alt="" />
+    </:decoration>
+  </ErrorLayout>
+</AuApp>

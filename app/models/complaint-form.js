@@ -46,9 +46,7 @@ export const validationSchema = Joi.object({
   telephone: Joi.string()
     .empty('')
     .regex(/^(tel:)?\+?[0-9]*$/)
-    .required()
     .messages({
-      'any.required': 'Het veld telefoonnummer is verplicht.',
       'string.pattern.base':
         'Het veld Telefoonnummer mag enkel een plusteken en cijfers bevatten.',
     }),
