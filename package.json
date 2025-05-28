@@ -3,7 +3,10 @@
   "version": "0.7.0",
   "private": true,
   "description": "Ember.js frontend of the complaint-form app.",
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lblod/frontend-complaint-form.git"
+  },
   "license": "MIT",
   "author": "redpencil.io",
   "directories": {
