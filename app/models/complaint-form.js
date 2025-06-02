@@ -18,10 +18,12 @@ export default class ComplaintForm extends Model {
 
 export const validationSchema = Joi.object({
   name: Joi.string()
+    .trim()
     .empty('')
     .required()
     .messages({ '*': 'Het veld Naam is verplicht.' }),
   street: Joi.string()
+    .trim()
     .empty('')
     .required()
     .messages({ '*': 'Het veld Straat is verplicht.' }),
@@ -31,6 +33,7 @@ export const validationSchema = Joi.object({
     .required()
     .messages({ '*': 'Het veld Huisnummer is verplicht.' }),
   locality: Joi.string()
+    .trim()
     .empty('')
     .required()
     .messages({ '*': 'Het veld Gemeente of Stad is verplicht.' }),
@@ -44,6 +47,7 @@ export const validationSchema = Joi.object({
       '*': 'Het veld Postcode moet een geldige postcode bevatten.',
     }),
   telephone: Joi.string()
+    .trim()
     .empty('')
     .regex(/^(tel:)?\+?[0-9]*$/)
     .messages({
@@ -54,6 +58,7 @@ export const validationSchema = Joi.object({
     '*': 'Het veld E-mailadres moet een geldig e-mailadres bevatten',
   }),
   content: Joi.string()
+    .trim()
     .empty('')
     .required()
     .messages({ '*': 'Het veld Omschrijving klacht is verplicht.' }),
