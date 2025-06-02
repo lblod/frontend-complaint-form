@@ -86,7 +86,11 @@ export default class ComplaintsIndex extends Component {
               <th>{{! Details page link }}</th>
             </c.header>
             <c.body as |complaint|>
-              <td>{{complaint.name}}</td>
+              <td>
+                <div class="u-truncate">
+                  {{complaint.name}}
+                </div>
+              </td>
               <td>
                 {{#if complaint.telephone}}
                   <AuLinkExternal href="tel:{{complaint.telephone}}">
