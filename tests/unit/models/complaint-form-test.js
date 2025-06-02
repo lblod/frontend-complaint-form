@@ -20,6 +20,7 @@ module('Unit | Model | complaint form', function (hooks) {
     assert.ok(result.errors.email, 'invalid email');
     assert.ok(result.errors.content, 'invalid content');
 
+    // Empty strings
     complaintForm.name = '';
     complaintForm.street = '';
     complaintForm.houseNumber = '';
@@ -31,7 +32,35 @@ module('Unit | Model | complaint form', function (hooks) {
 
     result = await validateRecord(complaintForm, validationSchema);
     assert.false(result.isValid, 'empty strings are ignored');
+    assert.ok(result.errors.name, 'invalid name');
+    assert.ok(result.errors.street, 'invalid street');
+    assert.ok(result.errors.houseNumber, 'invalid house number');
+    assert.ok(result.errors.locality, 'invalid locality');
+    assert.ok(result.errors.postalCode, 'invalid postal code');
+    assert.ok(result.errors.email, 'invalid email');
+    assert.ok(result.errors.content, 'invalid content');
 
+    // Whitespace-only values
+    complaintForm.name = ' ';
+    complaintForm.street = ' ';
+    complaintForm.houseNumber = ' ';
+    complaintForm.locality = ' ';
+    complaintForm.postalCode = ' ';
+    complaintForm.telephone = ' ';
+    complaintForm.email = ' ';
+    complaintForm.content = ' ';
+
+    result = await validateRecord(complaintForm, validationSchema);
+    assert.false(result.isValid, 'whitespace-only is not valid');
+    assert.ok(result.errors.name, 'invalid name');
+    assert.ok(result.errors.street, 'invalid street');
+    assert.ok(result.errors.houseNumber, 'invalid house number');
+    assert.ok(result.errors.locality, 'invalid locality');
+    assert.ok(result.errors.postalCode, 'invalid postal code');
+    assert.ok(result.errors.email, 'invalid email');
+    assert.ok(result.errors.content, 'invalid content');
+
+    // Valid values
     complaintForm.name = 'Jane Doe';
     complaintForm.street = 'Foostraat';
     complaintForm.houseNumber = '2';
@@ -45,6 +74,7 @@ module('Unit | Model | complaint form', function (hooks) {
     assert.true(result.isValid);
     assert.notOk(result.errors);
 
+    // Extra validation checks
     complaintForm.houseNumber = '2A';
     complaintForm.postalCode = '1000000000';
     complaintForm.email = 'foobar.be';
