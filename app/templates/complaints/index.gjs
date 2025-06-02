@@ -57,7 +57,7 @@ export default class ComplaintsIndex extends Component {
           <t.content as |c|>
             <c.header>
               <AuDataTableThSortable
-                @field="name"
+                @field=":no-case:name"
                 @currentSorting={{@controller.sort}}
                 @label="Ingezonden door"
                 @class="data-table__header-title"
