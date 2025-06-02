@@ -57,7 +57,7 @@ export default class ComplaintsIndex extends Component {
           <t.content as |c|>
             <c.header>
               <AuDataTableThSortable
-                @field="name"
+                @field=":no-case:name"
                 @currentSorting={{@controller.sort}}
                 @label="Ingezonden door"
                 @class="data-table__header-title"
@@ -86,7 +86,11 @@ export default class ComplaintsIndex extends Component {
               <th>{{! Details page link }}</th>
             </c.header>
             <c.body as |complaint|>
-              <td>{{complaint.name}}</td>
+              <td>
+                <div class="u-truncate">
+                  {{complaint.name}}
+                </div>
+              </td>
               <td>
                 {{#if complaint.telephone}}
                   <AuLinkExternal href="tel:{{complaint.telephone}}">

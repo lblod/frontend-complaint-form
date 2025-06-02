@@ -44,3 +44,10 @@
   height: auto; // override the fixed height of the button height
   border: 0.1rem #c6cdd3 solid;
 }
+
+// Based on https://tailwindcss.com/docs/text-overflow#truncating-text
+.u-truncate {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
