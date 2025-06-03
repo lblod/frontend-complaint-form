@@ -33,6 +33,9 @@ export default function formatTel(tel) {
 
   const stripped = stripFormatting(tel);
 
+  // Our form doesn't trim the input yet, so it's possible users simply entered whitespace which we shouldn't try to format.
+  if (!stripped) return '';
+
   if (isShortNumber(stripped)) {
     // Short numbers don't require spaces
     return stripped;
@@ -143,9 +146,10 @@ function formatSpecialNumber(tel) {
  * @returns {string} Formatted string with digits grouped in twos.
  */
 function formatSeriesDigitsFree(digits) {
+  // TODO: We disable this check for now, since our form doesn't enforce a minimum of 4 characters
   // Throw an error if there are less than 4 digits
-  if (digits.length < 4)
-    throw new Error('Stopping because of fewer than 4 numbers');
+  // if (digits.length < 4)
+  //   throw new Error('Stopping because of fewer than 4 numbers');
 
   let input = digits;
   const output = [];

@@ -107,6 +107,10 @@ module('Unit | Helper | format-tel', function () {
     assert.strictEqual(formatTel(''), '');
   });
 
+  test('it returns an empty string if only whitespace is provided', function (assert) {
+    assert.strictEqual(formatTel('    '), '');
+  });
+
   test('it asserts the correct amount of arguments', function (assert) {
     assert.throws(() => {
       formatTel();

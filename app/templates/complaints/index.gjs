@@ -93,9 +93,15 @@ export default class ComplaintsIndex extends Component {
               </td>
               <td>
                 {{#if complaint.telephone}}
-                  <AuLinkExternal href="tel:{{complaint.telephone}}">
-                    {{formatTel complaint.telephone}}
-                  </AuLinkExternal>
+                  {{#let (formatTel complaint.telephone) as |tel|}}
+                    {{#if tel.length}}
+                      <AuLinkExternal href="tel:{{complaint.telephone}}">
+                        {{formatTel complaint.telephone}}
+                      </AuLinkExternal>
+                    {{else~}}
+                      -
+                    {{~/if}}
+                  {{/let}}
                 {{else}}-{{/if}}
               </td>
               <td>
