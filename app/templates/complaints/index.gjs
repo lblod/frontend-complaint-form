@@ -87,7 +87,8 @@ export default class ComplaintsIndex extends Component {
             </c.header>
             <c.body as |complaint|>
               <td>
-                <div class="u-truncate">
+                {{!template-lint-disable no-inline-styles}}
+                <div class="u-truncate" style="width:200px">
                   {{complaint.name}}
                 </div>
               </td>
