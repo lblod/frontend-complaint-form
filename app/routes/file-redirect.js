@@ -3,7 +3,12 @@ import { service } from '@ember/service';
 
 export default class FileRedirectRoute extends Route {
   @service router;
+  @service session;
   @service store;
+
+  beforeModel(transition) {
+    this.session.requireAuthentication(transition);
+  }
 
   async model(params) {
     const results = await this.store.query('complaint-form', {
