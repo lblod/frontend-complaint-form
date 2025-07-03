@@ -3,6 +3,7 @@ import { service } from '@ember/service';
 
 export default class FileRedirectRoute extends Route {
   @service router;
+  @service session;
   @service store;
 
   beforeModel(transition) {
