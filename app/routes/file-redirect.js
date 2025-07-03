@@ -5,6 +5,10 @@ export default class FileRedirectRoute extends Route {
   @service router;
   @service store;
 
+  beforeModel(transition) {
+    this.session.requireAuthentication(transition);
+  }
+
   async model(params) {
     const results = await this.store.query('complaint-form', {
       'filter[attachments][:id:]': params.id,
