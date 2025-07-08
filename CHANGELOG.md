@@ -1,3 +1,8 @@
+## v0.8.1 (2025-07-08)
+
+#### :bug: Bug Fix
+* [#25](https://github.com/lblod/frontend-complaint-form/pull/25) Fix an issue with the login redirection logic ([@Windvis](https://github.com/Windvis))
+
 ## v0.8.0 (2025-07-03)
 
 #### :boom: Breaking Change
