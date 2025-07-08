@@ -1,8 +1,11 @@
+import { service } from '@ember/service';
 import BaseSessionService from 'ember-simple-auth/services/session';
 import ENV from 'frontend-complaint-form/config/environment';
 import { isValidAcmidmConfig } from 'frontend-complaint-form/utils/acmidm';
 
 export default class SessionService extends BaseSessionService {
+  @service router;
+
   get isAcmIdmSession() {
     if (!this.isAuthenticated) {
       return false;
