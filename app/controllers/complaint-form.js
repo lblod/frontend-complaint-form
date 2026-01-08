@@ -71,6 +71,10 @@ export default class ComplaintFormController extends Controller {
 
       addAttachmentsToComplaint(complaint, this.uploadedFiles);
       await complaint.save();
+
+      complaint.status = 'send'
+      await complaint.save();
+
     } catch (e) {
       this.saveComplaintError = e.message;
     }

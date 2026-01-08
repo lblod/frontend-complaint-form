@@ -13,6 +13,7 @@ export default class ComplaintForm extends Model {
   @attr email;
   @attr content;
   @attr('datetime') created;
+  @attr status;
   @hasMany('file', { async: false, inverse: null }) attachments;
 }
 
