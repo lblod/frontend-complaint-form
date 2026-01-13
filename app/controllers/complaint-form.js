@@ -8,6 +8,7 @@ import { validateRecord } from '../utils/validate-record';
 import { validationSchema } from '../models/complaint-form';
 import { TrackedArray } from 'tracked-built-ins';
 import { humanReadableSize } from 'frontend-complaint-form/models/file';
+import { SENT_STATUS } from '../models/complaint-status';
 
 export default class ComplaintFormController extends Controller {
   @service store;
@@ -72,7 +73,11 @@ export default class ComplaintFormController extends Controller {
       addAttachmentsToComplaint(complaint, this.uploadedFiles);
       await complaint.save();
 
-      complaint.status = 'sent'
+      const newStatuses = await this.store.query('complaint-status', {
+        page: { size: 1 },
+        'filter[:uri:]': SENT_STATUS,
+      });
+      if (newStatuses.length) complaint.status = newStatuses.at(0);
       await complaint.save();
 
     } catch (e) {
