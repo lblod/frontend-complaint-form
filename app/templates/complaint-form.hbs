@@ -243,6 +243,7 @@
         @maxFileSizeMB={{1024}}
         @multiple={{true}}
         @onUpload={{this.attachFile}}
+        @onQueueUpdate={{this.handleQueueUpdate}}
       />
     </AuFormRow>
 
@@ -256,6 +257,7 @@
       @size="large"
       @loading={{this.saveComplaint.isRunning}}
       @loadingMessage="Aan het verzenden"
+      @disabled={{this.isUploadingFiles}}
       class="au-c-button--green"
       type="submit"
     >

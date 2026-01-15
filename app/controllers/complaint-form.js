@@ -18,6 +18,7 @@ export default class ComplaintFormController extends Controller {
   @tracked errors = {};
   @tracked saveComplaintError;
   @tracked uploadedFiles = new TrackedArray([]);
+  @tracked isUploadingFiles = false;
 
   get nameIsInvalid() {
     return this.showErrors.name && this.errors.name;
@@ -110,6 +111,11 @@ export default class ComplaintFormController extends Controller {
       name: file.name,
       size: humanReadableSize(file.size),
     });
+  }
+
+  @action
+  handleQueueUpdate(queueInfo) {
+    this.isUploadingFiles = !queueInfo.isQueueEmpty;
   }
 
   @action
