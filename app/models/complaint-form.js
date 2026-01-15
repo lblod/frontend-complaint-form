@@ -1,4 +1,4 @@
-import Model, { attr, hasMany } from '@ember-data/model';
+import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
 import Joi from 'joi';
 
 export default class ComplaintForm extends Model {
@@ -13,6 +13,11 @@ export default class ComplaintForm extends Model {
   @attr email;
   @attr content;
   @attr('datetime') created;
+  @belongsTo('complaint-status', {
+    inverse: 'complaintForms',
+    async: false,
+  })
+  status;
   @hasMany('file', { async: false, inverse: null }) attachments;
 }
 
