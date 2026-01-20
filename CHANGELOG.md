@@ -1,3 +1,8 @@
+## v0.8.2 (2026-01-19)
+
+#### :bug: Bug Fix
+* [#31](https://github.com/lblod/frontend-complaint-form/pull/31) improve conversion to email ([@DamonKennes](https://github.com/DamonKennes))
+
 ## v0.8.1 (2025-07-08)
 
 #### :bug: Bug Fix
