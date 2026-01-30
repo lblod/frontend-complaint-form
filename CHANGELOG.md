@@ -1,3 +1,8 @@
+## unreleased
+
+#### :bug: Bug Fix
+* [#32](https://github.com/lblod/frontend-complaint-form/pull/32) [DL-7130] disable send button while uploading attachments ([@DamonKennes](https://github.com/DamonKennes))
+
 ## v0.8.2 (2026-01-19)
 
 #### :bug: Bug Fix
