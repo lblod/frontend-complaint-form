@@ -161,5 +161,5 @@ function hasAttachments(attachments) {
 }
 
 function downloadLink(file) {
-  return `/files-download/${file.id}/download?name=${file.filename}`;
+  return `/files-download/${file.id}/download?name=${encodeURIComponent(file.filename)}`;
 }
