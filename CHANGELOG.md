@@ -1,3 +1,8 @@
+## v0.8.4 (2026-07-10)
+
+#### :bug: Bug Fix
+* [#36](https://github.com/lblod/frontend-complaint-form/pull/36) [DL-7363] download fix for special characters ([@DamonKennes](https://github.com/DamonKennes))
+
 ## v0.8.3 (2026-01-30)
 
 #### :bug: Bug Fix
