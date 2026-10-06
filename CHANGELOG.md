@@ -1,3 +1,8 @@
+## v0.9.0 (2026-10-06)
+
+#### :rocket: Enhancement
+* [#37](https://github.com/lblod/frontend-complaint-form/pull/37) [DL-7612] Display a disclaimer about our email usage ([@Windvis](https://github.com/Windvis))
+
 ## v0.8.4 (2026-07-10)
 
 #### :bug: Bug Fix
