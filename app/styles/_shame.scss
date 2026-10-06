@@ -51,3 +51,10 @@
   text-overflow: ellipsis;
   overflow: hidden;
 }
+
+.disclaimer-icon {
+  // Some visual offset to center the icon next to the text properly. Flex wouldn't do it.
+  top: 2px;
+  // The au-icon class adds some bottom offset that we don't want here
+  bottom: 0;
+}
